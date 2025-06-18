@@ -12,13 +12,9 @@ body:
     attributes:
       label: To test your sight, and reliability, please select the option of what should NOT be requested.
       options:
-        - Proper credit that was forgotten
-        - Thing that would not cause problems
-        - Useful feature
-        - Actual feedback
-        - A good idea
         - Stage Editor, 6K+ support, and winning icons.
         - Better LUA mod support idea
         - Code optimization that would make the game faster. (You should make a PR if this is your request, by the way.)
+        - Modcharting Tool addition
     validations:
       required: true
