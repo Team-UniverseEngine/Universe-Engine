@@ -15,6 +15,6 @@ body:
         - Stage Editor, 6K+ support, and winning icons.
         - Better LUA mod support idea
         - Code optimization that would make the game faster. (You should make a PR if this is your request, by the way.)
-        - Modcharting Tool addition
+        - Modcharting Tool addition, Mobile Support
     validations:
       required: true
