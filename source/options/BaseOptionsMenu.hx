@@ -59,12 +59,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		DiscordClient.changePresence(rpcTitle, null);
 		#end
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.updateHitbox();
 			add(bg);
 
@@ -79,7 +79,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.updateHitbox();
 			add(bg);
 
@@ -376,7 +376,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				item.alpha = 1;
 			}
-			if (ClientPrefs.fm && item.targetY != 0)
+			if (ClientPrefs.data.fm && item.targetY != 0)
 			{
 				item.targetX -= Std.int(Math.abs(item.targetY) * 10);
 			}

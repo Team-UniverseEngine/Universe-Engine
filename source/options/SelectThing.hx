@@ -40,7 +40,7 @@ class SelectThing extends MusicBeatState
 	{
 		switch (label)
 		{
-			case 'Universe Options':
+			case 'Solar Options':
 				MusicBeatState.switchState(new options.UniverseOptionsMenu());
 			case 'Psych Options':
 				MusicBeatState.switchState(new options.OptionsState());
@@ -56,10 +56,10 @@ class SelectThing extends MusicBeatState
 
 	override function create()
 	{
-		// FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic), "shared"), 0);
+		// FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic), "shared"), 0);
 		// FlxG.sound.music.fadeIn(4, 0, 0.7);
 
-		if (ClientPrefs.moveCreditMods)
+		if (ClientPrefs.data.moveCreditMods)
 			options = ['Universe Options', 'Psych Options', 'Mods', 'Credits'];
 		else
 			options = ['Universe Options', 'Psych Options'];
@@ -71,12 +71,12 @@ class SelectThing extends MusicBeatState
 
 		DiscordClient.changePresence("Selecting options category", null);
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.updateHitbox();
 			add(bg);
 
@@ -91,7 +91,7 @@ class SelectThing extends MusicBeatState
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.updateHitbox();
 			add(bg);
 

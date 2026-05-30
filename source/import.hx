@@ -6,7 +6,7 @@ import Paths;
 	#elseif (hxCodec <= "2.6.1")
 	import hxcodec.VideoHandler as MP4Handler;
 	#else
-	import hxcodec.FlxVideo as MP4Handler;
+	import hxCodec.flixel.FlxVideo as MP4Handler;
 	#end
 #end
 import flixel.FlxSprite;

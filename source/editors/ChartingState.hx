@@ -253,12 +253,12 @@ class ChartingState extends MusicBeatState
 
 		vortex = FlxG.save.data.chart_vortex;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.color = 0xFF222222;
 			bg.scrollFactor.set();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 		else
@@ -266,7 +266,7 @@ class ChartingState extends MusicBeatState
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 			bg.scrollFactor.set();
 			bg.color = 0xFF222222;
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 
@@ -2112,7 +2112,7 @@ class ChartingState extends MusicBeatState
 			{
 				PlayState.chartingMode = false;
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
-				FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+				FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 				FlxG.mouse.visible = false;
 				return;
 			}
@@ -2506,7 +2506,7 @@ class ChartingState extends MusicBeatState
 					{
 						if ((playSoundBf.checked && note.mustPress) || (playSoundDad.checked && !note.mustPress))
 						{
-							var soundToPlay = "hitsound-" + (ClientPrefs.ht);
+							var soundToPlay = "hitsound-" + (ClientPrefs.data.ht);
 							if (_song.player1 == 'gf')
 							{ // Easter egg
 								soundToPlay = 'GF_' + Std.string(data + 1);
@@ -2519,7 +2519,7 @@ class ChartingState extends MusicBeatState
 						data = note.noteData;
 						if (note.mustPress && lilBuddiesBox.checked)
 						{
-							if (ClientPrefs.enableColorShader || ClientPrefs.showNotes && ClientPrefs.enableColorShader)
+							if (ClientPrefs.data.enableColorShader || ClientPrefs.data.showNotes && ClientPrefs.data.enableColorShader)
 							{
 								lilBf.color = note.rgbShader.r;
 							}
@@ -2527,7 +2527,7 @@ class ChartingState extends MusicBeatState
 						}
 						if (!note.mustPress && lilBuddiesBox.checked)
 						{
-							if (ClientPrefs.enableColorShader || ClientPrefs.showNotes && ClientPrefs.enableColorShader)
+							if (ClientPrefs.data.enableColorShader || ClientPrefs.data.showNotes && ClientPrefs.data.enableColorShader)
 							{
 								lilOpp.color = note.rgbShader.r;
 							}

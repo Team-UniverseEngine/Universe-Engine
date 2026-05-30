@@ -71,12 +71,12 @@ class NotesSubState extends MusicBeatSubstate
 		DiscordClient.changePresence("Note Colors Menu", null);
 		#end
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 		else
@@ -84,7 +84,7 @@ class NotesSubState extends MusicBeatSubstate
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 
@@ -552,7 +552,7 @@ class NotesSubState extends MusicBeatSubstate
 			spawnNotes();
 			return;
 		}
-		dataArray = !onPixel ? ClientPrefs.arrowRGB : ClientPrefs.arrowRGBPixel;
+		dataArray = !onPixel ? ClientPrefs.data.arrowRGB : ClientPrefs.data.arrowRGBPixel;
 		if (onPixel)
 			PlayState.stageUI = "pixel";
 
@@ -584,7 +584,7 @@ class NotesSubState extends MusicBeatSubstate
 		// respawn stuff
 		/*var res:Int = onPixel ? 160 : 17;
 			skinNote = new FlxSprite(48, 24).loadGraphic(Paths.image('noteColorMenu/' + (onPixel ? 'note' : 'notePixel')), true, res, res);
-			skinNote.antialiasing = ClientPrefs.globalAntialiasing;
+			skinNote.antialiasing = ClientPrefs.data.antialiasing;
 			skinNote.setGraphicSize(68);
 			skinNote.updateHitbox();
 			skinNote.animation.add('anim', [0], 24, true);
@@ -597,7 +597,7 @@ class NotesSubState extends MusicBeatSubstate
 		{
 			var newNote:FlxSprite = new FlxSprite(230 + (100 * i),
 				100).loadGraphic(Paths.image('noteColorMenu/' + (!onPixel ? 'note' : 'notePixel')), true, res, res);
-			newNote.antialiasing = ClientPrefs.globalAntialiasing;
+			newNote.antialiasing = ClientPrefs.data.antialiasing;
 			newNote.setGraphicSize(85);
 			newNote.updateHitbox();
 			newNote.animation.add('anim', [i], 24, true);

@@ -437,6 +437,10 @@ class Paths
 		return 'mods/' + key;
 	}
 
+	inline public static function mods_documents(key:String = '') {
+		return #if windows Sys.getEnv("USERPROFILE") #else Sys.getEnv("HOME") #end + "/Documents/SolarEngine/Mods/" + key;
+	}
+
 	inline static public function modsFont(key:String) {
 		return modFolders('fonts/' + key);
 	}
@@ -485,6 +489,8 @@ class Paths
 			if(FileSystem.exists(fileToCheck)) {
 				return fileToCheck;
 			}
+
+			fileToCheck = mods_documents(currentModDirectory + '/' + key);
 		}
 
 		for(mod in getGlobalMods()){
@@ -527,6 +533,22 @@ class Paths
 							trace(e);
 						}
 					}
+					else
+					{
+						path = Paths.mods_documents(folder + '/pack.json');
+						if(FileSystem.exists(path)) {
+							try{
+								var rawJson:String = File.getContent(path);
+								if(rawJson != null && rawJson.length > 0) {
+									var stuff:Dynamic = Json.parse(rawJson);
+									var global:Bool = Reflect.getProperty(stuff, "runsGlobally");
+									if(global)globalMods.push(dat[0]);
+								}
+							} catch(e:Dynamic){
+								trace(e);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -544,6 +566,23 @@ class Paths
 				}
 			}
 		}
+
+
+		modsFolder = mods_documents();
+		trace(modsFolder);
+		if (FileSystem.exists(modsFolder)) {
+			for (folder in FileSystem.readDirectory(modsFolder)) {
+				var path = haxe.io.Path.join([modsFolder, folder]);
+				if (sys.FileSystem.isDirectory(path) && !ignoreModFolders.contains(folder) && !list.contains(folder)) {
+					list.push(path);
+				}
+			}
+		}
+		else
+		{
+			FileSystem.createDirectory(modsFolder);
+		}
+		trace(list);
 		return list;
 	}
 	#end

@@ -50,7 +50,7 @@ class Alphabet extends FlxSpriteGroup
 		this.startPosition.x = x;
 		this.startPosition.y = y;
 		this.bold = bold;
-		if (ClientPrefs.cm == true)
+		if (ClientPrefs.data.cm == true)
 		{
 			this.text = r.replace(text, 'w');
 		}
@@ -399,7 +399,7 @@ class AlphaCharacter extends FlxSprite
 	{
 		super(x, y);
 		this.parent = parent;
-		if (!ClientPrefs.darkmode)
+		if (!ClientPrefs.data.darkmode)
 		{
 			image = 'alphabet';
 		}
@@ -407,7 +407,7 @@ class AlphaCharacter extends FlxSprite
 		{
 			image = 'alphabet2';
 		}
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = ClientPrefs.data.antialiasing;
 
 		var curLetter:Letter = allLetters.get('?');
 

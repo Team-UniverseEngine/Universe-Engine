@@ -90,7 +90,7 @@ class PauseSubState extends MusicBeatSubstate
 		}
 		else if (songName != 'None')
 		{
-			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)), true, true);
+			pauseMusic.loadEmbedded(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), true, true);
 		}
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
@@ -228,7 +228,7 @@ class PauseSubState extends MusicBeatSubstate
 				}
 		}
 
-		if (accepted && (cantUnpause <= 0 || !ClientPrefs.controllerMode))
+		if (accepted && (cantUnpause <= 0 || !ClientPrefs.data.controllerMode))
 		{
 			if (menuItems == difficultyChoices)
 			{
@@ -353,9 +353,9 @@ class PauseSubState extends MusicBeatSubstate
 				case "Options":
 					FlxG.switchState(new options.OptionsState());
 					inPause = true;
-					if (ClientPrefs.pauseMusic != 'None')
+					if (ClientPrefs.data.pauseMusic != 'None')
 					{
-						FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)), pauseMusic.volume);
+						FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
 						FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
 						FlxG.sound.music.time = pauseMusic.time;
 					}
@@ -372,7 +372,7 @@ class PauseSubState extends MusicBeatSubstate
 
 					FlxG.switchState(new FreeplayState());
 
-					FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+					FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
 			}

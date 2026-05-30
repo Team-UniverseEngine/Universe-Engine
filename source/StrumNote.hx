@@ -46,9 +46,9 @@ class StrumNote extends FlxSkewedSprite
 		if (PlayState.SONG != null && PlayState.SONG.disableNoteRGB)
 			useRGBShader = false;
 
-		var arr:Array<FlxColor> = ClientPrefs.arrowRGB[leData];
+		var arr:Array<FlxColor> = ClientPrefs.data.arrowRGB[leData];
 		if (PlayState.isPixelStage)
-			arr = ClientPrefs.arrowRGBPixel[leData];
+			arr = ClientPrefs.data.arrowRGBPixel[leData];
 
 		noteData = leData;
 		this.player = player;
@@ -123,7 +123,7 @@ class StrumNote extends FlxSkewedSprite
 			animation.addByPrefix('purple', 'arrowLEFT');
 			animation.addByPrefix('red', 'arrowRIGHT');
 
-			antialiasing = ClientPrefs.globalAntialiasing;
+			antialiasing = ClientPrefs.data.antialiasing;
 			setGraphicSize(Std.int(width * 0.7));
 
 			switch (Math.abs(noteData) % 4)
@@ -194,6 +194,10 @@ class StrumNote extends FlxSkewedSprite
 		}
 		if (useRGBShader)
 			rgbShader.enabled = (animation.curAnim != null && animation.curAnim.name != 'static');
+		if (PlayState.SONG.disableNoteRGB)
+		{
+			rgbShader.enabled = false;
+		}
 	}
 
 	public function updateRGBColors(?r:FlxColor, ?g:FlxColor, ?b:FlxColor)
@@ -204,13 +208,21 @@ class StrumNote extends FlxSkewedSprite
 			rgbShader.g = g;
 			rgbShader.b = b;
 		}
+		if (PlayState.SONG.disableNoteRGB)
+		{
+			rgbShader.enabled = false;
+		}
 	}
 
 	public function resetRGB()
 	{
+		if (PlayState.SONG.disableNoteRGB)
+		{
+			rgbShader.enabled = false;
+		}
 		if (rgbShader != null && animation.curAnim != null && animation.curAnim.name == 'static')
 		{
-			switch (ClientPrefs.noteColorStyle)
+			switch (ClientPrefs.data.noteColorStyle)
 			{
 				case 'Quant-Based', 'Rainbow', 'Char-Based':
 					rgbShader.r = 0xFFF9393F;

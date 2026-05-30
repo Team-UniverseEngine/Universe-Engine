@@ -69,7 +69,7 @@ class CoolMenuState extends MusicBeatState
 
 	override function create()
 	{
-		if (ClientPrefs.moveCreditMods)
+		if (ClientPrefs.data.moveCreditMods)
 			menuList = [['Story Mode'], ['freeplay'], ['options']];
 		else
 			menuList = [['Story Mode'], ['freeplay'], ['mods'], ['credits'], ['options']];
@@ -86,7 +86,7 @@ class CoolMenuState extends MusicBeatState
 
 		if (FlxG.sound.music == null)
 		{
-			FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm), 0.7);
+			FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm), 0.7);
 		}
 
 		camBG = new FlxCamera();
@@ -110,7 +110,7 @@ class CoolMenuState extends MusicBeatState
 		camHUD.follow(hudFollow, LOCKON, 1);
 		CustomFadeTransition.nextCamera = camHUD;
 
-		if (!ClientPrefs.darkmode)
+		if (!ClientPrefs.data.darkmode)
 		{
 			var yScroll:Float = Math.max(0.25 - (0.05 * (menuList.length - 4)), 0.1);
 			var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
@@ -118,10 +118,10 @@ class CoolMenuState extends MusicBeatState
 			bg.setGraphicSize(Std.int(bg.width * 1.175));
 			bg.updateHitbox();
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.cameras = [camBG];
 			add(bg);
-			if (ClientPrefs.cm)
+			if (ClientPrefs.data.cm)
 			{
 				bg.color = 0xFFfd719b;
 			}
@@ -138,10 +138,10 @@ class CoolMenuState extends MusicBeatState
 			bg.setGraphicSize(Std.int(bg.width * 1.175));
 			bg.updateHitbox();
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.cameras = [camBG];
 			add(bg);
-			if (ClientPrefs.cm)
+			if (ClientPrefs.data.cm)
 			{
 				bg.color = 0xFFfd719b;
 			}
@@ -219,10 +219,10 @@ class CoolMenuState extends MusicBeatState
 		arrow.screenCenter(Y);
 		arrow.angle = 90;
 		arrow.scale.set(0.75, -0.75);
-		arrow.antialiasing = ClientPrefs.globalAntialiasing;
+		arrow.antialiasing = ClientPrefs.data.antialiasing;
 		arrow.scrollFactor.set();
 		add(arrow);
-		if (ClientPrefs.disable2ndpage)
+		if (ClientPrefs.data.disable2ndpage)
 			arrow.alpha = 0;
 
 		FlxTween.tween(arrow, {x: targetArrowX}, 1, {
@@ -251,7 +251,7 @@ class CoolMenuState extends MusicBeatState
 
 		hudFollow.y = FlxMath.lerp(hudFollow.y, (720 / 2) + intensity, elapsed * 8);
 
-		if (ClientPrefs.sillyBob)
+		if (ClientPrefs.data.sillyBob)
 		{
 			bgFollow.y = (720 / 2) + Math.abs(Math.sin(((curDecBeat / 2) % 1) * 2 * Math.PI)) * 6;
 		}
@@ -276,7 +276,7 @@ class CoolMenuState extends MusicBeatState
 			{
 				doShish();
 			}
-			if (!ClientPrefs.disable2ndpage)
+			if (!ClientPrefs.data.disable2ndpage)
 			{
 				if (controls.UI_RIGHT_P && curPage != "useless" && !switching)
 				{
@@ -351,9 +351,9 @@ class CoolMenuState extends MusicBeatState
 			var menuDesc:String = menu[1];
 
 			var redexcute = ~/r/g;
-			var menuItem:MenuText = new MenuText(-800, 60 + (idd * 130), 0, ClientPrefs.cm ? redexcute.replace(menuName, 'w') : menuName, 100);
+			var menuItem:MenuText = new MenuText(-800, 60 + (idd * 130), 0, ClientPrefs.data.cm ? redexcute.replace(menuName, 'w') : menuName, 100);
 			menuItem.font = Paths.font("Phantomuff/PhantomMuff Difficult Font.ttf");
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.color = (idd == curSelected ? 0xFFFFFFFF : 0xFFA0A0A0);
 			menuItem.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0xA0000000, 5, 1);
 			menuItem.alignment = LEFT;
@@ -396,9 +396,9 @@ class CoolMenuState extends MusicBeatState
 			var menuDesc:String = menu[1];
 
 			var redexcute = ~/r/g;
-			var menuItem:MenuText = new MenuText(-800, 110 + (idd * 130), 0, ClientPrefs.cm ? redexcute.replace(menuName, 'w') : menuName, 100);
+			var menuItem:MenuText = new MenuText(-800, 110 + (idd * 130), 0, ClientPrefs.data.cm ? redexcute.replace(menuName, 'w') : menuName, 100);
 			menuItem.font = Paths.font("Phantomuff/PhantomMuff Difficult Font.ttf");
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.color = (idd == curSelected ? 0xFFFFFFFF : 0xFFA0A0A0);
 			menuItem.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0xA0000000, 5, 1);
 			menuItem.alignment = LEFT;
@@ -642,7 +642,7 @@ class MenuSprite extends FlxSprite
 	public function new(X:Float = 0, Y:Float = 0, ?SimpleGraphic:Null<flixel.system.FlxAssets.FlxGraphicAsset>)
 	{
 		super(X, Y, SimpleGraphic);
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = ClientPrefs.data.antialiasing;
 	}
 
 	override function update(elapsed:Float)

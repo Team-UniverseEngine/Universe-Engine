@@ -94,7 +94,7 @@ class Note extends FlxSkewedSprite
 		r: -1,
 		g: -1,
 		b: -1,
-		a: ClientPrefs.splashAlpha
+		a: ClientPrefs.data.splashAlpha
 	};
 
 	// Lua shit
@@ -175,9 +175,9 @@ class Note extends FlxSkewedSprite
 
 	public function defaultRGB()
 	{
-		var arr:Array<FlxColor> = ClientPrefs.arrowRGB[noteData];
+		var arr:Array<FlxColor> = ClientPrefs.data.arrowRGB[noteData];
 		if (pixelNote)
-			arr = ClientPrefs.arrowRGBPixel[noteData];
+			arr = ClientPrefs.data.arrowRGBPixel[noteData];
 		if (noteData > -1 && noteData <= arr.length)
 		{
 			rgbShader.r = arr[0];
@@ -234,7 +234,7 @@ class Note extends FlxSkewedSprite
 				var newRGB:RGBPalette = new RGBPalette();
 				globalRgbShaders[noteData] = newRGB;
 
-				var arr:Array<FlxColor> = (!PlayState.isPixelStage) ? ClientPrefs.arrowRGB[noteData] : ClientPrefs.arrowRGBPixel[noteData];
+				var arr:Array<FlxColor> = (!PlayState.isPixelStage) ? ClientPrefs.data.arrowRGB[noteData] : ClientPrefs.data.arrowRGBPixel[noteData];
 				if (noteData > -1 && noteData <= arr.length)
 				{
 					newRGB.r = arr[0];
@@ -245,7 +245,7 @@ class Note extends FlxSkewedSprite
 			return globalRgbShaders[noteData];
 		}
 		else
-			switch (ClientPrefs.noteColorStyle)
+			switch (ClientPrefs.data.noteColorStyle)
 			{
 				case 'Quant-Based':
 					if (globalRgbShaders[0] == null)
@@ -253,7 +253,7 @@ class Note extends FlxSkewedSprite
 						var newRGB:RGBPalette = new RGBPalette();
 						globalRgbShaders[0] = newRGB;
 
-						var arr:Array<FlxColor> = (!note.pixelNote) ? ClientPrefs.arrowRGB[3] : ClientPrefs.arrowRGBPixel[3];
+						var arr:Array<FlxColor> = (!note.pixelNote) ? ClientPrefs.data.arrowRGB[3] : ClientPrefs.data.arrowRGBPixel[3];
 						if (noteData > -1)
 						{
 							newRGB.r = arr[0];
@@ -282,7 +282,7 @@ class Note extends FlxSkewedSprite
 						var newRGB:RGBPalette = new RGBPalette();
 						globalRgbShaders[noteData] = newRGB;
 
-						var arr:Array<FlxColor> = (!note.pixelNote) ? ClientPrefs.arrowRGB[noteData] : ClientPrefs.arrowRGBPixel[noteData];
+						var arr:Array<FlxColor> = (!note.pixelNote) ? ClientPrefs.data.arrowRGB[noteData] : ClientPrefs.data.arrowRGBPixel[noteData];
 						if (noteData > -1 && noteData <= arr.length)
 						{
 							newRGB.r = arr[0];
@@ -305,12 +305,12 @@ class Note extends FlxSkewedSprite
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
 
-		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
+		x += (ClientPrefs.data.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
 		y -= 2000;
 		this.strumTime = strumTime;
 		if (!inEditor)
-			this.strumTime += ClientPrefs.noteOffset;
+			this.strumTime += ClientPrefs.data.noteOffset;
 
 		this.noteData = noteData;
 
@@ -325,7 +325,7 @@ class Note extends FlxSkewedSprite
 				animToPlay = colArray[noteData % 4];
 				animation.play(animToPlay + 'Scroll');
 			}
-			if (ClientPrefs.enableColorShader)
+			if (ClientPrefs.data.enableColorShader)
 			{
 				try
 				{
@@ -346,10 +346,10 @@ class Note extends FlxSkewedSprite
 
 		if (isSustainNote && prevNote != null)
 		{
-			alpha = (ClientPrefs.longnotet);
-			multAlpha = (ClientPrefs.longnotet);
+			alpha = (ClientPrefs.data.longnotet);
+			multAlpha = (ClientPrefs.data.longnotet);
 			hitsoundDisabled = true;
-			if (ClientPrefs.downScroll)
+			if (ClientPrefs.data.downScroll)
 				flipY = true;
 
 			offsetX += width / 2;
@@ -470,7 +470,7 @@ class Note extends FlxSkewedSprite
 		{
 			frames = Paths.getSparrowAtlas(blahblah);
 			loadNoteAnims();
-			antialiasing = ClientPrefs.globalAntialiasing;
+			antialiasing = ClientPrefs.data.antialiasing;
 		}
 		if (isSustainNote)
 		{
@@ -519,8 +519,11 @@ class Note extends FlxSkewedSprite
 	public static function getNoteSkinPostfix()
 	{
 		var skin:String = '';
-		if (ClientPrefs.noteSkin != 'Default')
-			skin = '-' + ClientPrefs.noteSkin.trim().toLowerCase().replace(' ', '_');
+		if (ClientPrefs.data != null)
+		{
+			if (ClientPrefs.data.noteSkin != 'Default')
+				skin = '-' + ClientPrefs.data.noteSkin.trim().toLowerCase().replace(' ', '_');
+		}
 		return skin;
 	}
 

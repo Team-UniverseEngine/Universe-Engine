@@ -28,7 +28,7 @@ class OutdatedState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
 		bg.color = 0xFFFF8C19;
 		bg.scale.set(1.1, 1.1);
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 
 		checker = new FlxBackdrop(Paths.image('checker', 'preload'), FlxAxes.XY);
@@ -80,7 +80,7 @@ class OutdatedState extends MusicBeatState
 				FlxTween.tween(warnText, {alpha: 0}, 1, {
 					onComplete: function(twn:FlxTween)
 					{
-						if (ClientPrefs.fm)
+						if (ClientPrefs.data.fm)
 						{
 							MusicBeatState.switchState(new CoolMenuState());
 						}

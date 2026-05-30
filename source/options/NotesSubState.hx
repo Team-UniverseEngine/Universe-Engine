@@ -48,12 +48,12 @@ class NotesSubState extends MusicBeatSubstate
 	{
 		super();
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 		else
@@ -61,7 +61,7 @@ class NotesSubState extends MusicBeatSubstate
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 
@@ -74,7 +74,7 @@ class NotesSubState extends MusicBeatSubstate
 		grpNumbers = new FlxTypedGroup<Alphabet>();
 		add(grpNumbers);
 
-		for (i in 0...ClientPrefs.arrowHSV.length)
+		for (i in 0...ClientPrefs.data.arrowHSV.length)
 		{
 			var yPos:Float = (165 * i) + 35;
 			for (j in 0...3)
@@ -88,13 +88,13 @@ class NotesSubState extends MusicBeatSubstate
 			var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
 			note.animation.addByPrefix('idle', animations[i]);
 			note.animation.play('idle');
-			note.antialiasing = ClientPrefs.globalAntialiasing;
+			note.antialiasing = ClientPrefs.data.antialiasing;
 			grpNotes.add(note);
 
 			var newShader:ColorSwap = new ColorSwap();
 			note.shader = newShader.shader;
-			newShader.hue = ClientPrefs.arrowHSV[i][0] / 360;
-			newShader.saturation = ClientPrefs.arrowHSV[i][1] / 100;
+			newShader.hue = ClientPrefs.data.arrowHSV[i][0] / 360;
+			newShader.saturation = ClientPrefs.data.arrowHSV[i][1] / 100;
 			newShader.brightness = ClientPrefs.arrowHSV[i][2] / 100;
 			shaderArray.push(newShader);
 		}

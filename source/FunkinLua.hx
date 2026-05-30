@@ -204,61 +204,66 @@ class FunkinLua
 		set('gfName', PlayState.SONG.gfVersion);
 
 		// Some settings, no jokes
-		set('downscroll', ClientPrefs.downScroll);
-		set('middlescroll', ClientPrefs.middleScroll);
-		set('framerate', ClientPrefs.framerate);
-		set('ghostTapping', ClientPrefs.ghostTapping);
-		set('hideHud', ClientPrefs.hideHud);
-		set('timeBarType', ClientPrefs.timeBarType);
-		set('scoreZoom', ClientPrefs.scoreZoom);
-		set('cameraZoomOnBeat', ClientPrefs.camZooms);
-		set('flashingLights', ClientPrefs.flashing);
-		set('noteOffset', ClientPrefs.noteOffset);
-		set('healthBarAlpha', ClientPrefs.healthBarAlpha);
-		set('noResetButton', ClientPrefs.noReset);
-		set('lowQuality', ClientPrefs.lowQuality);
-		set('shadersEnabled', ClientPrefs.shaders);
+		set('downscroll', ClientPrefs.data.downScroll);
+		set('middlescroll', ClientPrefs.data.middleScroll);
+		set('framerate', ClientPrefs.data.framerate);
+		set('ghostTapping', ClientPrefs.data.ghostTapping);
+		set('hideHud', ClientPrefs.data.hideHud);
+		set('timeBarType', ClientPrefs.data.timeBarType);
+		set('scoreZoom', ClientPrefs.data.scoreZoom);
+		set('cameraZoomOnBeat', ClientPrefs.data.camZooms);
+		set('flashingLights', ClientPrefs.data.flashing);
+		set('noteOffset', ClientPrefs.data.noteOffset);
+		set('healthBarAlpha', ClientPrefs.data.healthBarAlpha);
+		set('noResetButton', ClientPrefs.data.noReset);
+		set('lowQuality', ClientPrefs.data.lowQuality);
+		set('shadersEnabled', ClientPrefs.data.shaders);
 		set('scriptName', scriptName);
 		set('currentModDirectory', Paths.currentModDirectory);
 
 		// UE optiosn
-		set('universeEngine', ClientPrefs.universeEngineCPREF); // this is to check if you running solar engine!
-		set('UEkeystrokes', ClientPrefs.keystrokes);
-		set('UEkeyA', ClientPrefs.keyA);
-		set('UEkeyFT', ClientPrefs.keyFT);
-		set('UEkeyXPos', ClientPrefs.keyXPos);
-		set('UEkeyYPos', ClientPrefs.keyYPos);
-		set('UEHud', ClientPrefs.ueHud);
-		set('UEhudZoomOut', ClientPrefs.hudZoomOut);
-		set('UEhudPos', ClientPrefs.hudPosUE);
-		set('UEsnTimeFollow', ClientPrefs.sntf);
-		set('UEhitsound', ClientPrefs.ht);
-		set('UEDetachedHB', ClientPrefs.dhb);
-		set('UEcCounter', ClientPrefs.cc);
-		set('UESmoothHP', ClientPrefs.sh);
-		set('UEe100C', ClientPrefs.ec);
-		set('UEshakeMiss', ClientPrefs.snm);
-		set('UEtauntGo', ClientPrefs.tng);
-		set('UEiconBop', ClientPrefs.ib);
-		set('UEhidetimeBar', ClientPrefs.huet);
-		set('UE100comboSounds', ClientPrefs.css);
-		set('UEdarkenCamGame', ClientPrefs.dcm);
-		set('UEcute', ClientPrefs.cm);
-		set('UEmmm', ClientPrefs.mmm);
+		set('solarEngine', MainMenuState.ueVersion.trim()); // Version comparison.
+		set('UEkeystrokes', ClientPrefs.data.keystrokes);
+		set('UEkeyA', ClientPrefs.data.keyA);
+		set('UEkeyFT', ClientPrefs.data.keyFT);
+		set('UEkeyXPos', ClientPrefs.data.keyXPos);
+		set('UEkeyYPos', ClientPrefs.data.keyYPos);
+		set('UEHud', ClientPrefs.data.ueHud);
+		set('UEhudZoomOut', ClientPrefs.data.hudZoomOut);
+		set('UEhudPos', ClientPrefs.data.hudPosUE);
+		set('UEsnTimeFollow', ClientPrefs.data.sntf);
+		set('UEhitsound', ClientPrefs.data.ht);
+		set('UEDetachedHB', ClientPrefs.data.dhb);
+		set('UEcCounter', ClientPrefs.data.cc);
+		set('UESmoothHP', ClientPrefs.data.sh);
+		set('UEe100C', ClientPrefs.data.ec);
+		set('UEshakeMiss', ClientPrefs.data.snm);
+		set('UEtauntGo', ClientPrefs.data.tng);
+		set('UEiconBop', ClientPrefs.data.ib);
+		set('UEhidetimeBar', ClientPrefs.data.huet);
+		set('UE100comboSounds', ClientPrefs.data.css);
+		set('UEdarkenCamGame', ClientPrefs.data.dcm);
+		set('UEcute', ClientPrefs.data.cm);
+		set('UEmmm', ClientPrefs.data.mmm);
 		set('UEir', ir);
-		set('UEstrumsplash', ClientPrefs.uess);
-		set('UEresultscreen', ClientPrefs.ueresultscreen);
-		set('UEmisssounds', ClientPrefs.uems);
+		set('UEstrumsplash', ClientPrefs.data.uess);
+		set('UEresultscreen', ClientPrefs.data.ueresultscreen);
+		set('UEmisssounds', ClientPrefs.data.uems);
+		
+		set('noteLeftRGB', ClientPrefs.data.arrowRGB[0][0].toHexString(false, false));
+		set('noteDownRGB', ClientPrefs.data.arrowRGB[1][0].toHexString(false, false));
+		set('noteUpRGB', ClientPrefs.data.arrowRGB[2][0].toHexString(false, false));
+		set('noteRightRGB', ClientPrefs.data.arrowRGB[3][0].toHexString(false, false));
 
 		// UE gamepler
-		set('UEhealthDrain', ClientPrefs.gameplaySettings.get('hd'));
-		set('UEsd', ClientPrefs.gameplaySettings.get('sd'));
-		set('UEsustainOneNote', ClientPrefs.gameplaySettings.get('sn'));
-		set('modchart', ClientPrefs.gameplaySettings.get('modchart'));
-		set('UEplayBothSides', ClientPrefs.gameplaySettings.get('pbs'));
-		set('UEhealthdrainp2', ClientPrefs.gameplaySettings.get('hdp2'));
-		set('UEIncreasePBR', ClientPrefs.gameplaySettings.get('ipbr'));
-		set('UEipbrv', ClientPrefs.gameplaySettings.get('ipbrv'));
+		set('UEhealthDrain', ClientPrefs.data.gameplaySettings.get('hd'));
+		set('UEsd', ClientPrefs.data.gameplaySettings.get('sd'));
+		set('UEsustainOneNote', ClientPrefs.data.gameplaySettings.get('sn'));
+		set('modchart', ClientPrefs.data.gameplaySettings.get('modchart'));
+		set('UEplayBothSides', ClientPrefs.data.gameplaySettings.get('pbs'));
+		set('UEhealthdrainp2', ClientPrefs.data.gameplaySettings.get('hdp2'));
+		set('UEIncreasePBR', ClientPrefs.data.gameplaySettings.get('ipbr'));
+		set('UEipbrv', ClientPrefs.data.gameplaySettings.get('ipbrv'));
 
 		// ewwww cringe simplified names!!!
 		// VIDEOBOT WHY WOULD YOU EVEN SIMPLIFY THESE DAMN NAMES
@@ -345,6 +350,22 @@ class FunkinLua
 			}
 		});
 
+		Lua_helper.add_callback(lua, "getPref",
+			function(prefName:String, defaultValue:Dynamic)
+			{
+				if (!Reflect.hasField(ClientPrefs.data, prefName))
+					return defaultValue;
+
+				return Reflect.field(ClientPrefs.data, prefName);
+			});
+		Lua_helper.add_callback(lua, "setPref",
+			function(prefName:String, newValue:Dynamic)
+			{
+				if (Reflect.hasField(ClientPrefs.data, prefName))
+					Reflect.setField(ClientPrefs.data, prefName, newValue);
+
+				return newValue;
+			});
 		// custom substate
 		Lua_helper.add_callback(lua, "openCustomSubstate", function(name:String, pauseGame:Bool = false)
 		{
@@ -376,7 +397,7 @@ class FunkinLua
 		// shader shit
 		Lua_helper.add_callback(lua, "initLuaShader", function(name:String, glslVersion:Int = 120)
 		{
-			if (!ClientPrefs.shaders)
+			if (!ClientPrefs.data.shaders)
 				return false;
 
 			#if (!flash && MODS_ALLOWED && sys)
@@ -389,7 +410,7 @@ class FunkinLua
 
 		Lua_helper.add_callback(lua, "setSpriteShader", function(obj:String, shader:String)
 		{
-			if (!ClientPrefs.shaders)
+			if (!ClientPrefs.data.shaders)
 				return false;
 
 			#if (!flash && MODS_ALLOWED && sys)
@@ -632,7 +653,6 @@ class FunkinLua
 
 			return runningScripts;
 		});
-
 		Lua_helper.add_callback(lua, "callOnLuas",
 			function(?funcName:String, ?args:Array<Dynamic>, ignoreStops = false, ignoreSelf = true, ?exclusions:Array<String>)
 			{
@@ -1927,7 +1947,7 @@ class FunkinLua
 			else
 				MusicBeatState.switchState(new FreeplayState());
 
-			FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+			FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 			PlayState.changedDifficulty = false;
 			PlayState.chartingMode = false;
 			PlayState.instance.transitioning = true;
@@ -2140,7 +2160,7 @@ class FunkinLua
 			{
 				leSprite.loadGraphic(Paths.image(image));
 			}
-			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			leSprite.antialiasing = ClientPrefs.data.antialiasing;
 			PlayState.instance.modchartSprites.set(tag, leSprite);
 			leSprite.active = true;
 		});
@@ -2151,15 +2171,13 @@ class FunkinLua
 			var leSprite:ModchartSprite = new ModchartSprite(x, y);
 
 			loadFrames(leSprite, image, spriteType);
-			leSprite.antialiasing = ClientPrefs.globalAntialiasing;
+			leSprite.antialiasing = ClientPrefs.data.antialiasing;
 			PlayState.instance.modchartSprites.set(tag, leSprite);
 		});
 
 		Lua_helper.add_callback(lua, "makeGraphic", function(obj:String, width:Int, height:Int, color:String)
 		{
-			var colorNum:Int = Std.parseInt(color);
-			if (!color.startsWith('0x'))
-				colorNum = Std.parseInt('0xff' + color);
+			var colorNum:FlxColor = CoolUtil.colorFromString(color);
 
 			var spr:FlxSprite = PlayState.instance.getLuaObject(obj, false);
 			if (spr != null)
@@ -3513,7 +3531,7 @@ class FunkinLua
 
 	function initLuaShader(name:String, ?glslVersion:Int = 120)
 	{
-		if (!ClientPrefs.shaders)
+		if (!ClientPrefs.data.shaders)
 			return false;
 
 		#if (!flash && sys)
@@ -4057,7 +4075,7 @@ class ModchartSprite extends FlxSprite
 	public function new(?x:Float = 0, ?y:Float = 0)
 	{
 		super(x, y);
-		antialiasing = ClientPrefs.globalAntialiasing;
+		antialiasing = ClientPrefs.data.antialiasing;
 	}
 }
 

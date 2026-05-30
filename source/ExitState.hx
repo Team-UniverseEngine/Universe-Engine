@@ -32,23 +32,23 @@ class ExitState extends MusicBeatSubstate
 		bg.alpha = 0.2;
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 
 		exitNo = new FlxSprite(FlxG.width / 2 - 400, FlxG.height / 2 - 100).loadGraphic(Paths.image('exit/No'));
 		exitNo.updateHitbox();
-		exitNo.antialiasing = ClientPrefs.globalAntialiasing;
+		exitNo.antialiasing = ClientPrefs.data.antialiasing;
 		add(exitNo);
 		exitYes = new FlxSprite(FlxG.width / 2 + 200, FlxG.height / 2 - 100).loadGraphic(Paths.image('exit/Yes'));
 		exitYes.updateHitbox();
-		exitYes.antialiasing = ClientPrefs.globalAntialiasing;
+		exitYes.antialiasing = ClientPrefs.data.antialiasing;
 		add(exitYes);
 
 		var exitText:FlxText = new FlxText(FlxG.width / 2 - 350, FlxG.height / 2 - 200, "Are you sure you want to exit the game?", 16);
 		exitText.setFormat(Paths.font("funkin.ttf"), 32, FlxColor.WHITE);
 		add(exitText);
 
-		FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic), "shared"), 0);
+		FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic), "shared"), 0);
 		FlxG.sound.music.fadeIn(4, 0, 0.7);
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
@@ -117,7 +117,7 @@ class ExitState extends MusicBeatSubstate
 			}
 			else
 			{
-				FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+				FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 			}
 			inExit = false;
 			close();

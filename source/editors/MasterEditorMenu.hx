@@ -46,12 +46,12 @@ class MasterEditorMenu extends MusicBeatState
 		DiscordClient.changePresence("Editors Main Menu", null);
 		#end
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.color = 0xFF353535;
 			bg.scrollFactor.set();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 		else
@@ -123,7 +123,7 @@ class MasterEditorMenu extends MusicBeatState
 
 		if (controls.BACK)
 		{
-			if (ClientPrefs.fm)
+			if (ClientPrefs.data.fm)
 			{
 				MusicBeatState.switchState(new CoolMenuState());
 			}
@@ -171,7 +171,7 @@ class MasterEditorMenu extends MusicBeatState
 				item.alpha = 1;
 				// item.setGraphicSize(Std.int(item.width));
 			}
-			if (ClientPrefs.fm && item.targetY != 0)
+			if (ClientPrefs.data.fm && item.targetY != 0)
 			{
 				item.targetX -= Std.int(Math.abs(item.targetY) * 20);
 			}

@@ -14,17 +14,32 @@ class InitState extends FlxState
         var oldSave:FlxSave = new FlxSave();
         oldSave.bind("funkin", 'universe');
 
+        var oldControls:FlxSave = new FlxSave();
+        oldControls.bind("controls_v2", 'universe');
+
+        var newSave:FlxSave = new FlxSave();
+        newSave.bind("controls_v2", "solar");
+        if (newSave.isEmpty())
+        {
+            newSave.mergeData(oldControls.data);
+            newSave.flush();
+        }
+        newSave.close();
+        oldControls.close();
+
 		FlxG.save.bind('funkin', 'solar'); // get the save ready before starting the game.
-        if (!oldSave.isEmpty() && FlxG.save.data.wasTransferred == null) // Check if the save exists under the old folder.
+        if (FlxG.save.isEmpty()) // Check if the save currently exists.
         {
             FlxG.save.mergeData(oldSave.data);
-            FlxG.save.data.wasTransferred = true; // make sure this can't be run again
             FlxG.save.flush();
         }
+        oldSave.close();
+
         FlxG.signals.postStateSwitch.add(validateTitle);
 
         PlayerSettings.init();
 		ClientPrefs.loadPrefs(); // load the save for fixing potentially invalid options.
+        new Conductor();
 
         validateSettings();
 
@@ -33,7 +48,7 @@ class InitState extends FlxState
 
     public static function validateTitle()
     {
-        if (Application.current.window.title.trim().endsWith("Universe Engine")) Application.current.window.title = "Friday Night Funkin: Solar Engine"; // fix for scripts that are before this update.
+        if (Application.current.window.title.trim().contains("Universe Engine")) Application.current.window.title = "Friday Night Funkin: Solar Engine"; // fix for scripts that are before this update.
     }
 
     public static function validateSettings()
@@ -45,23 +60,23 @@ class InitState extends FlxState
 			'Daveberry'
 		];
 
-        if (!validMenuThemes.contains(ClientPrefs.mmm)) ClientPrefs.mmm = "Universe";
-        if (ClientPrefs.moveCreditMods) ClientPrefs.moveCreditMods = false;
+        if (!validMenuThemes.contains(ClientPrefs.data.mmm)) ClientPrefs.data.mmm = "Universe";
+        if (ClientPrefs.data.moveCreditMods) ClientPrefs.data.moveCreditMods = false;
 
         #if !SILLY_OPTIONS
-        if (ClientPrefs.cm) ClientPrefs.cm = false;
-        if (ClientPrefs.ft) ClientPrefs.ft = false;
-        if (ClientPrefs.fm) ClientPrefs.fm = false;
-        if (ClientPrefs.sillyBob) ClientPrefs.sillyBob = false;
-        if (ClientPrefs.ec) ClientPrefs.ec = false;
-        if (ClientPrefs.snm) ClientPrefs.snm = false;
-        if (ClientPrefs.tng) ClientPrefs.tng = false;
-        if (ClientPrefs.dcm) ClientPrefs.dcm = false;
-        if (ClientPrefs.dhb) ClientPrefs.dhb = false;
-        if (ClientPrefs.cc) ClientPrefs.cc = false;
-        if (ClientPrefs.hudZoomOut) ClientPrefs.hudZoomOut = false;
-        if (ClientPrefs.ib) ClientPrefs.ib = false;
-        if (ClientPrefs.lhpbgb) ClientPrefs.lhpbgb = false;
+        if (ClientPrefs.data.cm) ClientPrefs.data.cm = false;
+        if (ClientPrefs.data.ft) ClientPrefs.data.ft = false;
+        if (ClientPrefs.data.fm) ClientPrefs.data.fm = false;
+        if (ClientPrefs.data.sillyBob) ClientPrefs.data.sillyBob = false;
+        if (ClientPrefs.data.ec) ClientPrefs.data.ec = false;
+        if (ClientPrefs.data.snm) ClientPrefs.data.snm = false;
+        if (ClientPrefs.data.tng) ClientPrefs.data.tng = false;
+        if (ClientPrefs.data.dcm) ClientPrefs.data.dcm = false;
+        if (ClientPrefs.data.dhb) ClientPrefs.data.dhb = false;
+        if (ClientPrefs.data.cc) ClientPrefs.data.cc = false;
+        if (ClientPrefs.data.hudZoomOut) ClientPrefs.data.hudZoomOut = false;
+        if (ClientPrefs.data.ib) ClientPrefs.data.ib = false;
+        if (ClientPrefs.data.lhpbgb) ClientPrefs.data.lhpbgb = false;
         
         var validHitsounds:Array<String> = [
 			'Classic',
@@ -70,7 +85,29 @@ class InitState extends FlxState
 			'Heartbeat',
 			'Universe',
         ];
-        if (!validHitsounds.contains(ClientPrefs.ht)) ClientPrefs.ht = "Classic";
+        if (!validHitsounds.contains(ClientPrefs.data.ht)) ClientPrefs.data.ht = "Classic";
         #end
+
+        for (name => controls in ClientPrefs.keyBinds)
+        {
+            trace('$name = ${controlsToString(controls)}');
+            if (controls == [NONE, NONE])
+            {
+                ClientPrefs.keyBinds[name] = ClientPrefs.defaultKeys[name];
+                trace('$name was invalid!');
+            }
+        }
+    }
+
+    static function controlsToString(bind:Array<FlxKey>):String
+    {
+        var array:Array<String> = [];
+
+        for (control in bind)
+        {
+            array.push(control.toString());
+        }
+
+        return '$array';
     }
 }

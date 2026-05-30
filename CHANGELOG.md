@@ -1,5 +1,14 @@
 # Universe Engine Changelog.
 
+# [Solar Engine 0.6.2](https://github.com/Team-SolarEngine/Universe-Engine-Archive/releases/tag/0.6.2)
+
+## Changes
+
+- Fixed note RGB not being properly disabled with Pixel strum notes
+- Keystrokes color now reflects your RGB setting
+- Added a keybind verify step to InitState and properly moved 'controls_v2' to the 'solar' folder.
+- Fixed the options shortcut in the Shortcut Menu not matching the fact that Solar specific options were merged into the original options page.
+
 # [Solar Engine 0.6.1](https://github.com/Team-SolarEngine/Universe-Engine-Archive/releases/tag/0.6.9)
 
 ## Changes

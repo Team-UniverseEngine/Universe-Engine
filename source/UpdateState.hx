@@ -61,7 +61,7 @@ class UpdateState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
 		bg.color = 0xFFFF8C19;
 		bg.scale.set(1.1, 1.1);
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 
 		checker = new FlxBackdrop(Paths.image('checker', 'preload'), FlxAxes.XY);
@@ -120,8 +120,8 @@ class UpdateState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		checker.x += 0.45 / (ClientPrefs.framerate / 60);
-		checker.y += (0.16 / (ClientPrefs.framerate / 60));
+		checker.x += 0.45 / (ClientPrefs.data.framerate / 60);
+		checker.y += (0.16 / (ClientPrefs.data.framerate / 60));
 		switch (currentTask)
 		{
 			case "download_update":

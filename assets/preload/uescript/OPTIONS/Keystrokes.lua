@@ -24,6 +24,11 @@ keystrokecamera = 'other' -- Default: 'other', other values: 'camHud' and 'camGa
 -- DO NOT TOUCH!!! UNLESS YOU KNOW WHAT YOU ARE DOING!!!
 function onCreatePost()
     if UEkeystrokes then
+        upbuttoncolorkeystroke = noteUpRGB
+        downbuttoncolorkeystroke = noteDownRGB
+        rightbuttoncolorkeystroke = noteRightRGB
+        leftbuttoncolorkeystroke = noteLeftRGB
+
         makeLuaSprite('upButton', nil, UEkeyXPos, UEkeyYPos)
         makeGraphic('upButton', 44, 44, upbuttoncolorkeystroke)
 

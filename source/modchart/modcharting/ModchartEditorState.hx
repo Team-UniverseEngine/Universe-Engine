@@ -496,7 +496,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 		CoolUtil.opponentModeActive = opponentMode;
 		#end
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.alpha = 0.25;
@@ -509,7 +509,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 			var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
 			bg.alpha = 0.25;
 			bg.setGraphicSize(Std.int(FlxG.width), Std.int(FlxG.height));
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
 
@@ -562,7 +562,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 		arrow_Type_Sprites.set("default", Paths.getSparrowAtlas('ui skins/' + SONG.ui_Skin + "/arrows/default", 'shared'));
 		#end
 
-		#if (PSYCH && PSYCHVERSION >= "0.7")
+		#if (PSYCH && PSYCHVERSION >= "0.7" || SOLAR)
 		strumLine = new FlxSprite(ClientPrefs.data.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X, 50).makeGraphic(FlxG.width, 10);
 		if (ModchartUtil.getDownscroll(this))
 			strumLine.y = FlxG.height - 150;
@@ -1537,7 +1537,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 						#else
 						if (sustainNote.mustPress)
 							sustainNote.x += FlxG.width / 2; // general offset
-						else if (ClientPrefs.middleScroll)
+						else if (ClientPrefs.data.middleScroll)
 						{
 							sustainNote.x += 310;
 							if (daNoteData > 1) // Up and Right
@@ -1553,7 +1553,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 				{
 					swagNote.x += FlxG.width / 2; // general offset
 				}
-				#if (PSYCHVERSION >= "0.7")
+				#if (PSYCHVERSION >= "0.7" || SOLAR)
 				else if (ClientPrefs.data.middleScroll)
 				#else
 				else if (ClientPrefs.middleScroll)
@@ -1590,11 +1590,11 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 		usedKeyCount = 4;
 		#end
 
-		var strumLineX:Float = #if (PSYCH && PSYCHVERSION >= "0.7") ClientPrefs.data.middleScroll #elseif (PSYCH && PSYCHVERSION < "0.7") ClientPrefs.middleScroll #elseif LEATHER utilities.Options.getData("middlescroll") #end#if PSYCH ?PlayState.STRUM_X_MIDDLESCROLL:PlayState.STRUM_X #end;
+		var strumLineX:Float = #if (PSYCH && PSYCHVERSION >= "0.7" || SOLAR) ClientPrefs.data.middleScroll #elseif (PSYCH && PSYCHVERSION < "0.7") ClientPrefs.middleScroll #elseif LEATHER utilities.Options.getData("middlescroll") #end#if PSYCH ?PlayState.STRUM_X_MIDDLESCROLL:PlayState.STRUM_X #end;
 
 		var TRUE_STRUM_X:Float = strumLineX;
 
-		#if (PSYCH && PSYCHVERSION >= "0.7")
+		#if (PSYCH && PSYCHVERSION >= "0.7" || SOLAR)
 		if (PlayState.SONG.arrowSkin.contains('pixel'))
 		{
 			(ClientPrefs.data.middleScroll ? TRUE_STRUM_X += 3 : TRUE_STRUM_X += 2);
@@ -1607,7 +1607,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
-				#if (PSYCH && PSYCHVERSION >= "0.7")
+				#if (PSYCH && PSYCHVERSION >= "0.7" || SOLAR)
 				if (ClientPrefs.data.middleScroll)
 					targetAlpha = 0.35;
 				#elseif (PSYCH && !(PSYCHVERSION >= "0.7"))
@@ -1642,7 +1642,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 			babyArrow.y = strumLine.y - (babyArrow.height / 2);
 			babyArrow.x += 100 - ((usedKeyCount - 4) * 16) + (usedKeyCount >= 10 ? 30 : 0);
 			babyArrow.x += ((FlxG.width / 2) * player);
-			#elseif (PSYCH && PSYCHVERSION >= "0.7")
+			#elseif (PSYCH && PSYCHVERSION >= "0.7" || SOLAR)
 			var babyArrow:#if SCEModchartingTools StrumArrow = new StrumArrow(TRUE_STRUM_X, strumLine.y, i, player,
 				PlayState.isPixelStage ? 'pixel' : 'normal'); #else StrumNote = new StrumNote(TRUE_STRUM_X, strumLine.y, i, player); #end
 				babyArrow.downScroll = ClientPrefs.data.downScroll;
@@ -1655,7 +1655,7 @@ class ModchartEditorState extends #if SCEModchartingTools states.MusicBeatState 
 
 			var middleScroll:Bool = false;
 
-			#if (PSYCHVERSION >= "0.7" && PSYCH)
+			#if (PSYCHVERSION >= "0.7" && PSYCH || SOLAR)
 			middleScroll = ClientPrefs.data.middleScroll;
 			#elseif (PSYCHVERSION < "0.7" && PSYCH)
 			middleScroll = ClientPrefs.middleScroll;

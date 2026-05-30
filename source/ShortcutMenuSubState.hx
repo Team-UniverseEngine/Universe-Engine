@@ -24,7 +24,7 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 	var menuItemsOG:Array<String> = ['Title Screen', 'Menus', 'Modes', 'Options'];
 	var menuItemsSongs:Array<String> = ['Story Mode', 'Freeplay', 'Back'];
 	var menuItemsMenu:Array<String> = ['Main Menu', 'Mods Menu', 'Back'];
-	var menuItemsOptions:Array<String> = ['Universe', 'Psych', 'Back'];
+	//var menuItemsOptions:Array<String> = ['Solar', 'Psych', 'Back'];
 
 	var curSelected:Int = 0;
 
@@ -81,7 +81,7 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 				ease: FlxEase.quadOut,
 				onComplete: function(twn:FlxTween)
 				{
-					FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+					FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 					close();
 				}
 			});
@@ -94,14 +94,14 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 		{
 			changeSelection(1);
 		}
-		if (accepted && !ClientPrefs.controllerMode)
+		if (accepted && !ClientPrefs.data.controllerMode)
 		{
 			var daSelected:String = menuItems[curSelected];
 			switch (daSelected)
 			{
 				case 'Title Screen':
 					FlxG.switchState(new TitleState());
-					FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+					FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 					inShortcutMenu = false;
 				case 'Menus':
 					menuItems = menuItemsMenu;
@@ -110,8 +110,9 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 					menuItems = menuItemsSongs;
 					regenMenu();
 				case 'Options':
-					menuItems = menuItemsOptions;
-					regenMenu();
+					FlxG.switchState(new options.OptionsState());
+					FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
+					inShortcutMenu = false;
 			}
 			
 			if (menuItems == menuItemsSongs)
@@ -119,7 +120,7 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 				switch (daSelected)
 				{
 					case 'Story Mode':
-						if (ClientPrefs.fm)
+						if (ClientPrefs.data.fm)
 						{
 							FlxG.switchState(new CoolStoryState());
 						}
@@ -130,7 +131,7 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 						inShortcutMenu = false;
 					case 'Freeplay':
 						FlxG.switchState(new FreeplayState());
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 						inShortcutMenu = false;
 					case 'Back':
 						menuItems = menuItemsOG;
@@ -142,7 +143,7 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 				switch (daSelected)
 				{
 					case 'Main Menu':
-						if (ClientPrefs.fm)
+						if (ClientPrefs.data.fm)
 						{
 							MusicBeatState.switchState(new CoolMenuState());
 						}
@@ -150,22 +151,22 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 						{
 							MusicBeatState.switchState(new MainMenuState());
 						}
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 						inShortcutMenu = false;
 					case 'Mods Menu':
 						FlxG.switchState(new ModsMenuState());
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm));
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 						inShortcutMenu = false;
 					case 'Back':
 						menuItems = menuItemsOG;
 						regenMenu();
 				}
 			}
-			if (menuItems == menuItemsOptions)
+			/* if (menuItems == menuItemsOptions)
 			{
 				switch (daSelected)
 				{
-					case 'Universe':
+					case 'Solar':
 						FlxG.switchState(new options.UniverseOptionsMenu());
 						inShortcutMenu = false;
 					case 'Psych':
@@ -175,7 +176,7 @@ class ShortcutMenuSubState extends MusicBeatSubstate
 						menuItems = menuItemsOG;
 						regenMenu();
 				}
-			}
+			} */
 		}
 	}
 

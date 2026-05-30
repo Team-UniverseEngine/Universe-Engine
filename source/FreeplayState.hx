@@ -113,17 +113,17 @@ class FreeplayState extends MusicBeatState
 				}
 		}*/
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			bg = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 			bg.screenCenter();
 		}
 		else
 		{
 			bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 			bg.screenCenter();
 		}
@@ -143,7 +143,7 @@ class FreeplayState extends MusicBeatState
 			songText.isMenuItem = true;
 			songText.targetY = i - curSelected;
 			songText.targetX = i + curSelected;
-			if (ClientPrefs.fm)
+			if (ClientPrefs.data.fm)
 			{
 				songText.x = 320;
 			}
@@ -282,9 +282,9 @@ class FreeplayState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		var bot:Bool = ClientPrefs.gameplaySettings.get('botplay');
-		var practice:Bool = ClientPrefs.gameplaySettings.get('practice');
-		var modchart:Bool = ClientPrefs.gameplaySettings.get('modchart');
+		var bot:Bool = ClientPrefs.data.gameplaySettings.get('botplay');
+		var practice:Bool = ClientPrefs.data.gameplaySettings.get('practice');
+		var modchart:Bool = ClientPrefs.data.gameplaySettings.get('modchart');
 
 		if (FlxG.sound.music.volume < 0.7)
 		{
@@ -310,7 +310,7 @@ class FreeplayState extends MusicBeatState
 			ratingSplit[1] += '0';
 		}
 
-		if (ClientPrefs.cm)
+		if (ClientPrefs.data.cm)
 		{
 			bg.color = 0xFFfd719b;
 		}
@@ -392,7 +392,7 @@ class FreeplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if (ClientPrefs.fm)
+			if (ClientPrefs.data.fm)
 			{
 				MusicBeatState.switchState(new CoolMenuState());
 			}
@@ -598,7 +598,7 @@ class FreeplayState extends MusicBeatState
 				item.alpha = 1;
 				// item.setGraphicSize(Std.int(item.width));
 			}
-			if (ClientPrefs.fm && item.targetY != 0)
+			if (ClientPrefs.data.fm && item.targetY != 0)
 			{
 				item.targetX -= Std.int(Math.abs(item.targetY) * 10);
 			}

@@ -63,6 +63,8 @@ class OptionsState extends MusicBeatState
 		}
 	}
 
+	public static var nextState:String = null;
+
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
 
@@ -75,12 +77,12 @@ class OptionsState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("aboutMenu", "preload"));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.updateHitbox();
 			add(bg);
 
@@ -95,7 +97,7 @@ class OptionsState extends MusicBeatState
 			var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 			bg.color = 0xFFea71fd;
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.updateHitbox();
 			add(bg);
 
@@ -166,6 +168,13 @@ class OptionsState extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			openSelectedSubstate(options[curSelected]);
+		}
+
+		if (nextState != null)
+		{
+			var s = nextState;
+			nextState = null;
+			openSelectedSubstate(nextState);
 		}
 	}
 

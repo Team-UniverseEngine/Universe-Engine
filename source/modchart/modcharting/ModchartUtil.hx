@@ -26,7 +26,7 @@ class ModchartUtil
 		// need to test each engine
 		// not expecting all to work
 		#if PSYCH
-		#if (PSYCHVERSION <= "0.7")
+		#if (PSYCHVERSION <= "0.7" && !SOLAR)
 		return ClientPrefs.downScroll;
 		#else
 		return ClientPrefs.data.downScroll;
@@ -51,7 +51,7 @@ class ModchartUtil
 	public static function getMiddlescroll(instance:ModchartMusicBeatState)
 	{
 		#if PSYCH
-		#if (PSYCHVERSION <= "0.7")
+		#if (PSYCHVERSION <= "0.7" && !SOLAR)
 		return ClientPrefs.middleScroll;
 		#else
 		return ClientPrefs.data.middleScroll;

@@ -140,13 +140,13 @@ class TitleState extends MusicBeatState
 
 		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
-		if (ClientPrefs.mmm == "DNB Old")
+		if (ClientPrefs.data.mmm == "DNB Old")
 			titleJSON = Json.parse(Paths.getTextFromFile('images/bpmchange/DNB.json'));
-		else if (ClientPrefs.mmm == "Stay Funky")
+		else if (ClientPrefs.data.mmm == "Stay Funky")
 			titleJSON = Json.parse(Paths.getTextFromFile('images/bpmchange/Stay-Funky.json'));
-		else if (ClientPrefs.mmm == "Marked Engine")
+		else if (ClientPrefs.data.mmm == "Marked Engine")
 			titleJSON = Json.parse(Paths.getTextFromFile('images/bpmchange/Marked.json'));
-		else if (ClientPrefs.mmm == "Daveberry")
+		else if (ClientPrefs.data.mmm == "Daveberry")
 			titleJSON = Json.parse(Paths.getTextFromFile('images/bpmchange/Daveberry.json'));
 		#if TITLE_SCREEN_EASTER_EGG
 		if (FlxG.save.data.psychDevsEasterEgg == null)
@@ -255,20 +255,20 @@ class TitleState extends MusicBeatState
 
 			if (FlxG.sound.music == null)
 			{
-				FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm), 0);
+				FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm), 0);
 			}
 		}
 
 		Conductor.changeBPM(titleJSON.bpm);
 		persistentUpdate = true;
 
-		if (ClientPrefs.mmm != "AAC V4")
+		if (ClientPrefs.data.mmm != "AAC V4")
 		{
-			if (ClientPrefs.darkmode)
+			if (ClientPrefs.data.darkmode)
 			{
 				bg = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
 				bg.color = 0xFFFDE871;
-				bg.antialiasing = ClientPrefs.globalAntialiasing;
+				bg.antialiasing = ClientPrefs.data.antialiasing;
 				bg.setGraphicSize(Std.int(bg.width * 2));
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -278,7 +278,7 @@ class TitleState extends MusicBeatState
 			else
 			{
 				bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuBG'));
-				bg.antialiasing = ClientPrefs.globalAntialiasing;
+				bg.antialiasing = ClientPrefs.data.antialiasing;
 				bg.setGraphicSize(Std.int(bg.width * 2));
 				bg.updateHitbox();
 				bg.screenCenter();
@@ -289,11 +289,11 @@ class TitleState extends MusicBeatState
 			logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 
-			logoBl.antialiasing = ClientPrefs.globalAntialiasing;
+			logoBl.antialiasing = ClientPrefs.data.antialiasing;
 			logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 			logoBl.animation.play('bump');
 			logoBl.updateHitbox();
-			if (ClientPrefs.ft)
+			if (ClientPrefs.data.ft)
 			{
 				logoBl.y = FlxG.height / 2 - 450;
 				logoBl.screenCenter(X);
@@ -338,27 +338,27 @@ class TitleState extends MusicBeatState
 				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		}
-		if (ClientPrefs.mmm != "AAC V4")
+		if (ClientPrefs.data.mmm != "AAC V4")
 		{
-			gfDance.antialiasing = ClientPrefs.globalAntialiasing;
-			if (ClientPrefs.ft == true)
+			gfDance.antialiasing = ClientPrefs.data.antialiasing;
+			if (ClientPrefs.data.ft == true)
 			{
 				gfDance.screenCenter(X);
 				gfDance.y = FlxG.height / 2 - 200;
 				gfDance.scale.set(0.75, 0.75);
 			}
-			if (ClientPrefs.ft == true)
+			if (ClientPrefs.data.ft == true)
 			{
 				var fancyBG:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('universeBanner'));
 				fancyBG.updateHitbox();
 				fancyBG.screenCenter();
-				fancyBG.antialiasing = ClientPrefs.globalAntialiasing;
+				fancyBG.antialiasing = ClientPrefs.data.antialiasing;
 				fancyBG.setGraphicSize(Std.int(fancyBG.width * 1.175));
 				add(fancyBG);
 			}
 
 			logoBl.shader = swagShader.shader;
-			if (ClientPrefs.ft == true)
+			if (ClientPrefs.data.ft == true)
 			{
 				var darkBG:FlxSprite = new FlxSprite(0, 0);
 				darkBG.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -368,7 +368,7 @@ class TitleState extends MusicBeatState
 
 				var fancyLogoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 				fancyLogoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-				fancyLogoBl.antialiasing = ClientPrefs.globalAntialiasing;
+				fancyLogoBl.antialiasing = ClientPrefs.data.antialiasing;
 				fancyLogoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 				fancyLogoBl.animation.play('bump');
 				fancyLogoBl.updateHitbox();
@@ -383,17 +383,17 @@ class TitleState extends MusicBeatState
 			gfDance.shader = swagShader.shader;
 		}
 
-		if (ClientPrefs.mmm == "AAC V4")
+		if (ClientPrefs.data.mmm == "AAC V4")
 		{
 			bg = new FlxSprite(0, 0).loadGraphic(Paths.image('AmmarTitle/introBG'));
 			bg.updateHitbox();
 			bg.screenCenter();
-			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.setGraphicSize(Std.int(bg.width * 1.175));
 			add(bg);
 
 			blackDots = new FlxBackdrop(Paths.image("blackDots"), X);
-			blackDots.antialiasing = ClientPrefs.globalAntialiasing;
+			blackDots.antialiasing = ClientPrefs.data.antialiasing;
 			blackDots.setGraphicSize(Std.int(1280 * 1.04));
 			blackDots.updateHitbox();
 			blackDots.screenCenter();
@@ -406,19 +406,19 @@ class TitleState extends MusicBeatState
 			fnf.updateHitbox();
 			fnf.screenCenter(X);
 			fnf.y = FlxG.height / 2 - 370;
-			fnf.antialiasing = ClientPrefs.globalAntialiasing;
+			fnf.antialiasing = ClientPrefs.data.antialiasing;
 
 			anammar = new FlxSprite(0, 0).loadGraphic(Paths.image('AmmarTitle/An Ammar'));
 			anammar.updateHitbox();
 			anammar.screenCenter(X);
 			anammar.y = FlxG.height / 2 - 360;
-			anammar.antialiasing = ClientPrefs.globalAntialiasing;
+			anammar.antialiasing = ClientPrefs.data.antialiasing;
 
 			creativity = new FlxSprite(0, 0).loadGraphic(Paths.image('AmmarTitle/Creativity'));
 			creativity.updateHitbox();
 			creativity.screenCenter(X);
 			creativity.y = FlxG.height / 2 - 350;
-			creativity.antialiasing = ClientPrefs.globalAntialiasing;
+			creativity.antialiasing = ClientPrefs.data.antialiasing;
 
 			add(fnf);
 			add(anammar);
@@ -457,7 +457,7 @@ class TitleState extends MusicBeatState
 			newTitle = true;
 
 			titleText.animation.addByPrefix('idle', "ENTER IDLE", 24);
-			titleText.animation.addByPrefix('press', ClientPrefs.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
+			titleText.animation.addByPrefix('press', ClientPrefs.data.flashing ? "ENTER PRESSED" : "ENTER FREEZE", 24);
 		}
 		else
 		{
@@ -467,7 +467,7 @@ class TitleState extends MusicBeatState
 			titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
 		}
 
-		titleText.antialiasing = ClientPrefs.globalAntialiasing;
+		titleText.antialiasing = ClientPrefs.data.antialiasing;
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
 		titleText.x = titleText.x + 25;
@@ -476,7 +476,7 @@ class TitleState extends MusicBeatState
 
 		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
 		logo.screenCenter();
-		logo.antialiasing = ClientPrefs.globalAntialiasing;
+		logo.antialiasing = ClientPrefs.data.antialiasing;
 		// add(logo);
 
 		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
@@ -502,7 +502,7 @@ class TitleState extends MusicBeatState
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
-		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		ngSpr.antialiasing = ClientPrefs.data.antialiasing;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -569,7 +569,7 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
-		if (ClientPrefs.mmm == "AAC V4")
+		if (ClientPrefs.data.mmm == "AAC V4")
 		{
 			if (logoCanBeat)
 			{
@@ -631,7 +631,7 @@ class TitleState extends MusicBeatState
 				if (titleText != null)
 					titleText.animation.play('press');
 
-				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
+				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
 
 				transitioning = true;
@@ -639,7 +639,7 @@ class TitleState extends MusicBeatState
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (ClientPrefs.fm)
+					if (ClientPrefs.data.fm)
 					{
 						MusicBeatState.switchState(new CoolMenuState());
 					}
@@ -711,7 +711,7 @@ class TitleState extends MusicBeatState
 			skipIntro();
 		}
 
-		if (swagShader != null && ClientPrefs.ft == false)
+		if (swagShader != null && ClientPrefs.data.ft == false)
 		{
 			if (controls.UI_LEFT)
 				swagShader.hue -= elapsed * 0.1;
@@ -719,7 +719,7 @@ class TitleState extends MusicBeatState
 				swagShader.hue += elapsed * 0.1;
 		}
 
-		if (ClientPrefs.ft && ClientPrefs.mmm != "AAC V4")
+		if (ClientPrefs.data.ft && ClientPrefs.data.mmm != "AAC V4")
 		{
 			swagShader.hue += elapsed * 0.1;
 		}
@@ -783,7 +783,7 @@ class TitleState extends MusicBeatState
 				gfDance.animation.play('danceLeft');
 		}
 
-		if (ClientPrefs.mmm == "AAC V4")
+		if (ClientPrefs.data.mmm == "AAC V4")
 		{
 			if (logoCanBeat)
 			{
@@ -793,7 +793,7 @@ class TitleState extends MusicBeatState
 			}
 		}
 
-		if (!ExitState.inExit || ClientPrefs.mmm == "AAC V4")
+		if (!ExitState.inExit || ClientPrefs.data.mmm == "AAC V4")
 		{
 			FlxTween.tween(FlxG.camera, {zoom: 1.025}, 0.25, {ease: FlxEase.linear, type: BACKWARD});
 			// FlxTween.tween(FlxG.camera, {angle: (curBeat % 2 == 0 ? 1.025 : -1.025)}, 0.25, {ease: FlxEase.expoOut, type: BACKWARD});
@@ -807,13 +807,13 @@ class TitleState extends MusicBeatState
 		if (!closedState)
 		{
 			sickBeats++;
-			if (ClientPrefs.mmm != "AAC V4" && ClientPrefs.mmm != 'Stay Funky')
+			if (ClientPrefs.data.mmm != "AAC V4" && ClientPrefs.data.mmm != 'Stay Funky')
 			{
 				switch (sickBeats)
 				{
 					case 1:
 						// FlxG.sound.music.stop();
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm), 0);
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 					case 2:
 						createCoolText(['Solar Engine'], 15);
@@ -860,7 +860,7 @@ class TitleState extends MusicBeatState
 						skipIntro();
 				}
 			}
-			else if (ClientPrefs.mmm != "Stay Funky")
+			else if (ClientPrefs.data.mmm != "Stay Funky")
 			{
 				switch (sickBeats)
 				{
@@ -870,19 +870,19 @@ class TitleState extends MusicBeatState
 						video.playVideo("assets/videos/AACIntroUE.mp4");
 						#end
 
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm), 0);
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 					case 33:
 						skipIntro();
 				}
 			}
-			else if (ClientPrefs.mmm != "AAC V4" && ClientPrefs.mmm == 'Stay Funky')
+			else if (ClientPrefs.data.mmm != "AAC V4" && ClientPrefs.data.mmm == 'Stay Funky')
 			{
 				switch (sickBeats)
 				{
 					case 1:
 						// FlxG.sound.music.stop();
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm), 0);
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 						createCoolText(['Solar Engine'], 15);
 						addMoreText('By', 15);
@@ -920,7 +920,7 @@ class TitleState extends MusicBeatState
 	{
 		if (!skippedIntro)
 		{
-			if (ClientPrefs.mmm == "AAC V4")
+			if (ClientPrefs.data.mmm == "AAC V4")
 			{
 				FlxTween.tween(bg, {y: ((720 / 2) - (bg.height / 2))}, 1, {ease: FlxEase.expoOut, startDelay: 0.4});
 				FlxTween.tween(fnf, {"scale.x": 1, "scale.y": 1, alpha: 1}, 1, {ease: FlxEase.expoOut, startDelay: 0.3});
@@ -954,7 +954,7 @@ class TitleState extends MusicBeatState
 						skippedIntro = true;
 						playJingle = false;
 
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm), 0);
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 						return;
 				}
@@ -977,7 +977,7 @@ class TitleState extends MusicBeatState
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function()
 					{
-						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.mmm), 0);
+						FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 						transitioning = false;
 					};
@@ -1005,7 +1005,7 @@ class TitleState extends MusicBeatState
 				}
 				#end
 			}
-			if (ClientPrefs.mmm == "AAC V4")
+			if (ClientPrefs.data.mmm == "AAC V4")
 			{
 				var timer:FlxTimer = new FlxTimer().start(1.5, function(tmr:FlxTimer)
 				{

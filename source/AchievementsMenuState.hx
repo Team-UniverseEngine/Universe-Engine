@@ -35,23 +35,23 @@ class AchievementsMenuState extends MusicBeatState
 		DiscordClient.changePresence("Achievements Menu", null);
 		#end
 
-		if (ClientPrefs.darkmode)
+		if (ClientPrefs.data.darkmode)
 		{
 			var menuBG:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image("aboutMenu", "preload"));
 			menuBG.color = 0xFF9271FD;
 			menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 			menuBG.updateHitbox();
 			menuBG.screenCenter();
-			menuBG.antialiasing = ClientPrefs.globalAntialiasing;
+			menuBG.antialiasing = ClientPrefs.data.antialiasing;
 			add(menuBG);
 		}
-		else if (ClientPrefs.cm)
+		else if (ClientPrefs.data.cm)
 		{
 			var menuBG:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 			menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 			menuBG.updateHitbox();
 			menuBG.screenCenter();
-			menuBG.antialiasing = ClientPrefs.globalAntialiasing;
+			menuBG.antialiasing = ClientPrefs.data.antialiasing;
 			menuBG.color = 0xFFfd719b;
 			add(menuBG);
 		}
@@ -61,7 +61,7 @@ class AchievementsMenuState extends MusicBeatState
 			menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
 			menuBG.updateHitbox();
 			menuBG.screenCenter();
-			menuBG.antialiasing = ClientPrefs.globalAntialiasing;
+			menuBG.antialiasing = ClientPrefs.data.antialiasing;
 			add(menuBG);
 		}
 
@@ -120,7 +120,7 @@ class AchievementsMenuState extends MusicBeatState
 		if (controls.BACK)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if (ClientPrefs.fm)
+			if (ClientPrefs.data.fm)
 			{
 				MusicBeatState.switchState(new MainMenuState());
 			}
