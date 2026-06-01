@@ -1,6 +1,6 @@
 # Universe Engine Changelog.
 
-# [Solar Engine 0.6.1](https://github.com/Team-SolarEngine/Universe-Engine-Archive/releases/tag/0.6.9)
+# [Solar Engine 0.6.1](https://github.com/Team-SolarEngine/Universe-Engine-Archive/releases/tag/0.6.1)
 
 ## Changes
 
@@ -10,7 +10,7 @@
 - Fixed note RGB not being disabled on RGB Shader being disabled in the song
 - Added 2 checkboxes to the chart editor to disable note RGB or note splashes.
 
-# [Solar Engine 0.6.0](https://github.com/Team-SolarEngine/Universe-Engine-Archive/releases/tag/0.6.6)
+# [Solar Engine 0.6.0](https://github.com/Team-SolarEngine/Universe-Engine-Archive/releases/tag/0.6.0)
 
 > A Universe Engine update?! in 2026???!?!? No I am not going back and fixing the changelog to reflect this one frick you - Char
 
