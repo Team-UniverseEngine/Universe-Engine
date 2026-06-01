@@ -11,10 +11,9 @@
     <a href="https://discord.gg/RaHmP5fgyA">
       Join The OFFICIAL Solar Engine Discord Server!
     </a> <br>
-    <a href="https://universe-engine.netlify.app">
-      Check out the Universe Engine Website!
+    <a href="https://solar-engine.netlify.app">
+      Check out the Solar Engine Website!
     </a>
-    <br> Yes, it's still called that on the website.
   </p>
 </div>
 
