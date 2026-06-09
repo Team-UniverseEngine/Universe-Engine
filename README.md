@@ -1,4 +1,7 @@
-# Note: This readme is taken from a yet to be released version of Solar Engine! I just really hate the original old readme lmao
+> [!NOTE]
+> This readme is taken from a yet to be released version of Solar Engine! I just really hate the original old readme lmao
+>
+> Currently there is only one Maintaner of this repository, [CharGoldenYT](https://github.com/CharGoldenYT), as such there is likely to be a delay in respone times.
 <div align="center"> 
   <img src="assets/exclude/images/universe.png" height="285"> <br>
 
