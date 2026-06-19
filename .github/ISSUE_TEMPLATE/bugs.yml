@@ -7,6 +7,8 @@ body:
     attributes:
       label: "Are you sure that this isn't a duplicate issue from another person?"
       description: "You will agree that; if there's another duplicate issue from another person, this issue form will be closed without planned."
+      options:
+      - label: "I have searched existing issues and confirmed this is not a duplicate."
     validations:
       required: true
 
