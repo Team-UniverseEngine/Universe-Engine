@@ -2,17 +2,26 @@ name: Bug report
 description: Report bugs with the engine here
 labels: [bug]
 body:
+  - type: checkboxes
+    id: checkotherissues
+    attributes:
+      label: "Are you sure that this isn't a duplicate issue from another person?"
+      description: "You will agree that; if there's another duplicate issue from another person, this issue form will be closed without planned."
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:
-      label: "Describe your bug here."
+      label: "Describe your bug here. Please do not paste error logs here, there's another section for that."
+      description: "If possible, provide a video or a screenshot."
     validations:
       required: true
 
   - type: textarea
     id: terminal
     attributes:
-      label: "Command Prompt/Terminal logs (if existing)"
+      label: "Terminal logs/Error pop-up logs (if available)"
       render: bash
     validations:
       required: false
@@ -35,9 +44,7 @@ body:
         - "Windows"
         - "Linux"
         - "Mac"
-        - "HTML5"
-        - "Flash/Air-based target"
-        - "Neko, HashLink, or other build system"
+        - "Other"
     validations:
       required: true
 
@@ -45,6 +52,23 @@ body:
     id: buildsummary
     attributes:
       label: "Did you edit anything in this build? If so, mention or summarize your changes."
-      placeholder: "Yes, I edited ClientPrefs.hx and tried to add a new setting"
+      placeholder: "Yes, I edited ClientPrefs.hx and tried to add a new setting."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reprodbug
+    attributes:
+      label: "Steps on how to reproduce the bug"
+      description: "If possible, provide a video"y
+      placeholder: "Go into a song, press 7, and check this setting."
+    validations:
+      required: true
+
+  - type: textarea
+    id: inamod
+    attributes:
+      label: "Are you playing/creating a mod? If so, tell us the link and tell us if you have changed anything."
+      placeholder: "Yes, I played https://... without any changes"
     validations:
       required: true
