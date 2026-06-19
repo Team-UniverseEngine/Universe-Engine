@@ -60,7 +60,7 @@ body:
     id: reprodbug
     attributes:
       label: "Steps on how to reproduce the bug"
-      description: "If possible, provide a video"y
+      description: "If possible, provide a video"
       placeholder: "Go into a song, press 7, and check this setting."
     validations:
       required: true
