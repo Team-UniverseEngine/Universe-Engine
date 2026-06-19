@@ -58,7 +58,7 @@ body:
     validations:
       required: true
 
-  - type: textarea
+  - type: input
     id: reprodbug
     attributes:
       label: "Steps on how to reproduce the bug"
@@ -67,7 +67,7 @@ body:
     validations:
       required: true
 
-  - type: textarea
+  - type: input
     id: inamod
     attributes:
       label: "Are you playing/creating a mod? If so, tell us the link and tell us if you have changed anything."
