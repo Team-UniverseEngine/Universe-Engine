@@ -1,5 +1,7 @@
 package objects.uehud;
 
+import flixel.math.FlxMath;
+
 /**
  *  This can literally just be put in PlayState, but to keep with the spirit of the other script recreations, I'll put it here.
  */
@@ -168,16 +170,53 @@ class IconBop extends BaseScript
 
     public override function onBeatHit() {
         super.onBeatHit();
-
-        if (curBeat % 1 == 0)
+        
+        if (ClientPrefs.data.ib)
         {
-            cancelTweens();
-            beat1();
+            if (curBeat % 1 == 0)
+            {
+                cancelTweens();
+                beat1();
+            }
+            if (curBeat % 2 == 0)
+            {
+                cancelTweens();
+                beat2();
+            }
         }
-        if (curBeat % 2 == 0)
+        else
         {
-            cancelTweens();
-            beat2();
+            game.iconP1.scale.set(1.2, 1.2);
+            game.iconP2.scale.set(1.2, 1.2);
+
+            game.iconP1.updateHitbox();
+            game.iconP2.updateHitbox();
+        }
+    }
+
+    public override function updatePost(elapsed:Float) {
+        super.updatePost(elapsed);
+
+        if (!ClientPrefs.data.ib)
+        {
+            var mult:Float = FlxMath.lerp(1, game.iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9 * game.playbackRate), 0, 1));
+            game.iconP1.scale.set(mult, mult);
+            game.iconP1.updateHitbox();
+
+            var mult:Float = FlxMath.lerp(1, game.iconP2.scale.x, CoolUtil.boundTo(1 - (elapsed * 9 * game.playbackRate), 0, 1));
+            game.iconP2.scale.set(mult, mult);
+            game.iconP2.updateHitbox();
+
+            var iconOffset:Int = 26;
+
+            game.iconP1.x = game.healthBar.x
+                + (game.healthBar.width * (FlxMath.remapToRange(game.healthBar.percent, 0, 100, 100, 0) * 0.01))
+                + (150 * game.iconP1.scale.x - 150) / 2
+                - iconOffset;
+            game.iconP2.x = game.healthBar.x
+                + (game.healthBar.width * (FlxMath.remapToRange(game.healthBar.percent, 0, 100, 100, 0) * 0.01))
+                - (150 * game.iconP2.scale.x) / 2
+                - iconOffset * 2;
         }
     }
 
