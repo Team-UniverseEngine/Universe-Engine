@@ -176,7 +176,7 @@ class CoolUtil
 		#if !linux
 		lime.app.Application.current.window.alert(message, title);
 		#else
-		trace(title + " - " + message, ERROR);
+		trace(title + " - " + message);
 
 		var text:FlxText = new FlxText(8, 0, 1280, title + " - " + message, 24);
 		text.color = FlxColor.RED;
