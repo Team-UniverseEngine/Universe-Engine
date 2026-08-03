@@ -70,7 +70,9 @@ class DialogueEditorState extends MusicBeatState
 		add(character);
 
 		box = new FlxSprite(70, 370);
-		box.frames = Paths.getSparrowAtlas('speech_bubble');
+		var tex_str = "speech_bubble";
+		if (ClientPrefs.data.darkmode) tex_str = "speech_bubble_dark";
+		box.frames = Paths.getSparrowAtlas(tex_str);
 		box.scrollFactor.set();
 		box.antialiasing = ClientPrefs.data.antialiasing;
 		box.animation.addByPrefix('normal', 'speech bubble normal', 24);
