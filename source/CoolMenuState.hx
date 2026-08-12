@@ -1,5 +1,6 @@
 package;
 
+import fps.FPSExtended;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.sound.FlxSound;
@@ -95,8 +96,6 @@ class CoolMenuState extends MusicBeatState
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 
-		ShortcutMenuSubState.inShortcutMenu = false;
-
 		FlxG.cameras.reset(camBG);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
@@ -121,7 +120,7 @@ class CoolMenuState extends MusicBeatState
 			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.cameras = [camBG];
 			add(bg);
-			if (ClientPrefs.data.cm)
+			if (ClientPrefs.data.cuteMode)
 			{
 				bg.color = 0xFFfd719b;
 			}
@@ -141,7 +140,7 @@ class CoolMenuState extends MusicBeatState
 			bg.antialiasing = ClientPrefs.data.antialiasing;
 			bg.cameras = [camBG];
 			add(bg);
-			if (ClientPrefs.data.cm)
+			if (ClientPrefs.data.cuteMode)
 			{
 				bg.color = 0xFFfd719b;
 			}
@@ -233,6 +232,7 @@ class CoolMenuState extends MusicBeatState
 				FlxTween.tween(arrow, {"scale.y": 0.75}, 1, {ease: FlxEase.backInOut});
 			}
 		});
+		Main.fpsVar.addtlVars.remove(FPSExtended.defVars[1]); // Version is already on the main menu.
 	}
 
 	override function update(elapsed:Float)
@@ -260,7 +260,7 @@ class CoolMenuState extends MusicBeatState
 			bgFollow.y = FlxMath.lerp(bgFollow.y, (720 / 2) + (intensity / 2), elapsed * 8);
 		}
 
-		if (!ShortcutMenuSubState.inShortcutMenu && !selectedSomething)
+		if (!selectedSomething)
 		{
 			if (controls.UI_UP_P)
 			{
@@ -304,12 +304,6 @@ class CoolMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
-
-			if (FlxG.keys.justPressed.TAB)
-			{
-				openSubState(new ShortcutMenuSubState());
-				ShortcutMenuSubState.inShortcutMenu = true;
-			}
 			#if desktop
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
@@ -351,7 +345,7 @@ class CoolMenuState extends MusicBeatState
 			var menuDesc:String = menu[1];
 
 			var redexcute = ~/r/g;
-			var menuItem:MenuText = new MenuText(-800, 60 + (idd * 130), 0, ClientPrefs.data.cm ? redexcute.replace(menuName, 'w') : menuName, 100);
+			var menuItem:MenuText = new MenuText(-800, 60 + (idd * 130), 0, ClientPrefs.data.cuteMode ? redexcute.replace(menuName, 'w') : menuName, 100);
 			menuItem.font = Paths.font("Phantomuff/PhantomMuff Difficult Font.ttf");
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.color = (idd == curSelected ? 0xFFFFFFFF : 0xFFA0A0A0);
@@ -396,7 +390,7 @@ class CoolMenuState extends MusicBeatState
 			var menuDesc:String = menu[1];
 
 			var redexcute = ~/r/g;
-			var menuItem:MenuText = new MenuText(-800, 110 + (idd * 130), 0, ClientPrefs.data.cm ? redexcute.replace(menuName, 'w') : menuName, 100);
+			var menuItem:MenuText = new MenuText(-800, 110 + (idd * 130), 0, ClientPrefs.data.cuteMode ? redexcute.replace(menuName, 'w') : menuName, 100);
 			menuItem.font = Paths.font("Phantomuff/PhantomMuff Difficult Font.ttf");
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.color = (idd == curSelected ? 0xFFFFFFFF : 0xFFA0A0A0);

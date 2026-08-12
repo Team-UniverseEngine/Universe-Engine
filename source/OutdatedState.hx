@@ -66,7 +66,7 @@ class OutdatedState extends MusicBeatState
 				#if windows
 				FlxG.switchState(new UpdateState());
 				#else
-				CoolUtil.browserLoad("https://github.com/VideoBotYT/Universe-Engine/releases/");
+				CoolUtil.browserLoad("https://github.com/Team-SolarEngine/Solar-Engine-Archive/releases/");
 				#end
 			}
 			else if (controls.BACK)

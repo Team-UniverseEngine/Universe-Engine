@@ -63,8 +63,6 @@ class CoolStoryState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		ShortcutMenuSubState.inShortcutMenu = false;
-
 		PlayState.isStoryMode = true;
 		WeekData.reloadWeekFiles(true);
 		if (curWeek >= WeekData.weeksList.length)
@@ -242,7 +240,7 @@ class CoolStoryState extends MusicBeatState
 
 		// FlxG.watch.addQuick('font', scoreText.font);
 
-		if (!movedBack && !selectedWeek && !ShortcutMenuSubState.inShortcutMenu)
+		if (!movedBack && !selectedWeek)
 		{
 			var upP = controls.UI_UP_P;
 			var downP = controls.UI_DOWN_P;
@@ -299,17 +297,11 @@ class CoolStoryState extends MusicBeatState
 			}
 		}
 
-		if (controls.BACK && !movedBack && !selectedWeek && !ShortcutMenuSubState.inShortcutMenu)
+		if (controls.BACK && !movedBack && !selectedWeek)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
 			exitTween();
-		}
-
-		if (FlxG.keys.justPressed.TAB)
-		{
-			openSubState(new ShortcutMenuSubState());
-			ShortcutMenuSubState.inShortcutMenu = true;
 		}
 
 		super.update(elapsed);

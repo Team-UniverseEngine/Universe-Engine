@@ -32,5 +32,6 @@ import flixel.group.FlxSpriteGroup;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.math.FlxPoint;
-import sys.TempStateData.instance as StateData;
+
+using StringTools;
 #end

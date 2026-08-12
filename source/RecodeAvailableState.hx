@@ -17,7 +17,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 
-class OfficialLauncherState extends MusicBeatState
+class RecodeAvailableState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
@@ -30,10 +30,11 @@ class OfficialLauncherState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Hey there! We made a new Friday Night Funkin Mod launcher!
+			"1.0.0 is finally out! go to the new Solar Engine repo to download it!
 
-
-			Press ACCEPT to check it out, or press BACK to continue.",
+			Current recode version:" + TitleState.updateVersion + "
+			
+			Press ACCEPT to go there, BACK to continue",
 			32);
 		warnText.setFormat(Paths.font('funkin.ttf'), 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
@@ -51,7 +52,7 @@ class OfficialLauncherState extends MusicBeatState
 				if(!back) {
 					ClientPrefs.data.officialLauncher = false;
 					ClientPrefs.saveSettings();
-					CoolUtil.browserLoad("https://github.com/Team-SolarEngine/solar-lanucher"); // Love how we went from lauhncer to lanucher.
+					CoolUtil.browserLoad("https://github.com/Team-SolarEngine/solar-engine"); // Love how we went from lauhncer to lanucher.
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					FlxFlicker.flicker(warnText, 1, 0.1, false, true, function(flk:FlxFlicker) {
 						new FlxTimer().start(0.5, function (tmr:FlxTimer) {

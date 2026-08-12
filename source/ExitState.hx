@@ -111,14 +111,7 @@ class ExitState extends MusicBeatSubstate
 		}
 		if (curSelected == 0)
 		{
-			if (ShortcutMenuSubState.inShortcutMenu)
-			{
-				FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath('shortcut'), "shared"));
-			}
-			else
-			{
-				FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
-			}
+			FlxG.sound.playMusic(Paths.music("freakyMenu-" + ClientPrefs.data.mmm));
 			inExit = false;
 			close();
 		}

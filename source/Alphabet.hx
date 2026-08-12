@@ -50,7 +50,7 @@ class Alphabet extends FlxSpriteGroup
 		this.startPosition.x = x;
 		this.startPosition.y = y;
 		this.bold = bold;
-		if (ClientPrefs.data.cm == true)
+		if (ClientPrefs.data.cuteMode == true)
 		{
 			this.text = r.replace(text, 'w');
 		}

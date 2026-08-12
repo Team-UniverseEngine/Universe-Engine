@@ -52,7 +52,7 @@
 	<define name="TITLE_SCREEN_EASTER_EGG" if="officialBuild"/> <!-- DELETE THE if="officialBuild" for enabling this on an unofficial build -->
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="SILLY_OPTIONS" /> <!-- Allows certain settings to be enabled. -->
-	<!-- <define name="PROMPT_LAUNCHER" /> --> <!-- Launcher is archived! -->
+	<define name="PROMPT_LAUNCHER" />
 
 	<define name="PSYCH" />
 	<define name="PSYCHVERSION" value="0.6.3"/>

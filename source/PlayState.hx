@@ -1,5 +1,7 @@
 package;
 
+import fps.FPSExtended.ValueDef;
+import ClientPrefs.SaveOverrides;
 import objects.uehud.IconBop;
 import flixel.graphics.FlxGraphic;
 #if desktop
@@ -358,6 +360,7 @@ class PlayState extends MusicBeatState
 	public static var playerIsCheating:Bool = false;
 
 	public var iconBop:IconBop;
+	public var overrides:SaveOverrides = new SaveOverrides();
 
 	override public function create()
 	{
@@ -1169,7 +1172,7 @@ class PlayState extends MusicBeatState
 			playfieldRenderer.cameras = [camHUD];
 			add(playfieldRenderer);
 		}
-		if (!SONG.disableSplashes && ClientPrefs.data.noteSplashes) add(grpNoteSplashes);
+		if ((!SONG.disableSplashes && ClientPrefs.data.noteSplashes) || overrides.noteSplashes) add(grpNoteSplashes);
 
 		camFollow = new FlxPoint();
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -4829,7 +4832,7 @@ class PlayState extends MusicBeatState
 				var lastTime:Float = Conductor.songPosition;
 				Conductor.songPosition = FlxG.sound.music.time;
 
-				var canMiss:Bool = !ClientPrefs.data.ghostTapping;
+				var canMiss:Bool = !(ClientPrefs.data.ghostTapping && overrides.ghostTapping);
 
 				// heavily based on my own code LOL if it aint broke dont fix it
 				var pressNotes:Array<Note> = [];
@@ -5099,7 +5102,7 @@ class PlayState extends MusicBeatState
 
 	function noteMissPress(direction:Int = 1):Void // You pressed a key when there was no notes to press for this key
 	{
-		if (ClientPrefs.data.ghostTapping)
+		if (ClientPrefs.data.ghostTapping && overrides.ghostTapping)
 			return; // fuck it
 
 		if (!boyfriend.stunned)

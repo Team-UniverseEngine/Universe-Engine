@@ -151,6 +151,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK)
 		{
+			ClientPrefs.saveSettings(); // safe guard :]
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 				if (PauseSubState.inPause)
 				{

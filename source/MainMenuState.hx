@@ -1,5 +1,6 @@
 package;
 
+import fps.FPSExtended;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -57,8 +58,6 @@ class MainMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		ShortcutMenuSubState.inShortcutMenu = false;
-
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -101,7 +100,7 @@ class MainMenuState extends MusicBeatState
 			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
-		else if (ClientPrefs.data.cm)
+		else if (ClientPrefs.data.cuteMode)
 		{
 			var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 			bg.scrollFactor.set(0, yScroll);
@@ -243,6 +242,7 @@ class MainMenuState extends MusicBeatState
 
 		super.create();
 
+		Main.fpsVar.addtlVars.remove(FPSExtended.defVars[1]); // Version is already on the main menu.
 		if (ClientPrefs.data.fm) FlxG.switchState(new CoolMenuState()); // fix for potentially entering the incorrect state.
 	}
 
@@ -270,7 +270,7 @@ class MainMenuState extends MusicBeatState
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-		if (!selectedSomethin && !ShortcutMenuSubState.inShortcutMenu)
+		if (!selectedSomethin)
 		{
 			if (controls.RESET)
 			{
@@ -382,12 +382,6 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			#end
-
-			if (FlxG.keys.justPressed.TAB)
-			{
-				openSubState(new ShortcutMenuSubState());
-				ShortcutMenuSubState.inShortcutMenu = true;
-			}
 		}
 
 		super.update(elapsed);

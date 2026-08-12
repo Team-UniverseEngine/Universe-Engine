@@ -43,7 +43,7 @@ class StrumNote extends FlxSkewedSprite
 	{
 		rgbShader = new RGBShaderReference(this, Note.initializeGlobalRGBShader(leData));
 		rgbShader.enabled = false;
-		if (PlayState.SONG != null && PlayState.SONG.disableNoteRGB)
+		if ((PlayState.SONG != null && PlayState.SONG.disableNoteRGB) || (PlayState.instance != null && !PlayState.instance.overrides.noteRGB))
 			useRGBShader = false;
 
 		var arr:Array<FlxColor> = ClientPrefs.data.arrowRGB[leData];

@@ -1,5 +1,6 @@
 package;
 
+import fps.FPSExtended;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -51,8 +52,6 @@ class MainMenuUselessState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		ShortcutMenuSubState.inShortcutMenu = false;
-
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -95,7 +94,7 @@ class MainMenuUselessState extends MusicBeatState
 			bg.antialiasing = ClientPrefs.data.antialiasing;
 			add(bg);
 		}
-		else if (ClientPrefs.data.cm)
+		else if (ClientPrefs.data.cuteMode)
 		{
 			var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 			bg.scrollFactor.set(0, yScroll);
@@ -233,7 +232,7 @@ class MainMenuUselessState extends MusicBeatState
 			}
 		}
 		#end
-
+		Main.fpsVar.addtlVars.remove(FPSExtended.defVars[1]); // Version is already on the main menu.
 		super.create();
 	}
 
@@ -261,7 +260,7 @@ class MainMenuUselessState extends MusicBeatState
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-		if (!selectedSomethin && !ShortcutMenuSubState.inShortcutMenu)
+		if (!selectedSomethin)
 		{
 			if (controls.RESET)
 			{

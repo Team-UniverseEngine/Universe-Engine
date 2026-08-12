@@ -473,6 +473,16 @@ class ChartingState extends MusicBeatState
 		add(zoomTxt);
 
 		updateGrid();
+		Main.fpsVar.addWatchVariable("Notes this section: ", 0, ()->{
+			var notes:Int = 0;
+
+			try
+			{
+				notes = _song.notes[curSec].sectionNotes.length;
+			}
+
+			return notes;
+		});
 		super.create();
 	}
 

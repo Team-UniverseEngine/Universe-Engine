@@ -130,13 +130,13 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Fancy Title', 'Title bounce', 'ft', 'bool', false);
 		addOption(option);
 
-		var option:Option = new Option('Cute Mode', if (ClientPrefs.data.cm == true)
+		var option:Option = new Option('Cute Mode', if (ClientPrefs.data.cuteMode == true)
 		{
 			'i coded this UwU';
 		} else
 		{
 			'What is this option i never coded this';
-		}, 'cm', 'bool', false);
+		}, 'cuteMode', 'bool', false);
 		addOption(option);
 		option.onChange = restart;
 		#end
@@ -210,14 +210,15 @@ class VisualsUISubState extends BaseOptionsMenu
 		
 		#if !mobile
 		var option:Option = new Option('FPS Counter',
-			'If unchecked, hides FPS Counter.',
-			'showFPS',
-			'bool',
-			true);
+			'How should the FPS Counter show information?',
+			'FPSDisplay',
+			'string',
+			"Simple",
+			["Hide", "Simple", "Extended", "Fancy"]);
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
 		#end
-		
+
 		var option:Option = new Option('Pause Screen Song:',
 			"What song do you prefer for the Pause Screen?",
 			'pauseMusic',
@@ -279,7 +280,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		var option:Option = new Option('Taunt on Go!', "If unchecked, doesn't taunt on go!", 'tng', 'bool', true);
 		addOption(option);
 
-		var option:Option = new Option('Darken CamGame', 'If checked, it darkens the camGame, so its easier to read modcharts.', 'dcm', 'bool', false);
+		var option:Option = new Option('Darken CamGame', 'If checked, it darkens the camGame, so its easier to read modcharts.', 'darkenCamGame', 'bool', false);
 		addOption(option);
 		#end
 
@@ -325,7 +326,10 @@ class VisualsUISubState extends BaseOptionsMenu
 	function onChangeFPSCounter()
 	{
 		if (Main.fpsVar != null)
+		{
 			Main.fpsVar.visible = ClientPrefs.data.showFPS;
+			Main.fpsVar2.visible = ClientPrefs.data.fancyDisplay;
+		}
 	}
 	#end
 

@@ -12,7 +12,7 @@ class SaveData
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
-	public var showFPS:Bool = true;
+	public var showFPS(get, null):Bool;
 	public var flashing:Bool = true;
 	public var antialiasing:Bool = true;
 	public var noteSplashes:Bool = false;
@@ -71,10 +71,10 @@ class SaveData
 	public var snm:Bool = false;
 	public var tng:Bool = true;
 	public var ib:Bool = true;
-	public var cm:Bool = false;
+	public var cuteMode:Bool = false;
 	public var huet:Bool = false;
 	public var css:String = 'GF Sounds';
-	public var dcm:Bool = false;
+	public var darkenCamGame:Bool = false;
 	public var uess:Bool = true;
 	public var lhpbgb:Bool = false;
 	public var longnotet:Float = 0.6;
@@ -86,6 +86,14 @@ class SaveData
 	public var disable2ndpage:Bool = false;
 	public var hideOriCredits:Bool = false;
 	public var moveCreditMods:Bool = false;
+	public var FPSDisplay:String = "Simple";
+	public var fancyDisplay(get, null):Bool;
+	public var extendedFPS(get, null):Bool;
+	public var checkForUpdates:Bool = true;
+
+	function get_fancyDisplay():Bool return FPSDisplay == "Fancy";
+	function get_extendedFPS():Bool return FPSDisplay == "Extended";
+	function get_showFPS():Bool return (FPSDisplay == "Simple" || extendedFPS);
 
 	//offical launcherl mao
 	public var officialLauncher:Bool = true;
@@ -135,6 +143,59 @@ class SaveData
 	public var safeFrames:Float = 10;
 
 	public function new() return;
+}
+
+class SaveOverrides extends SaveData
+{
+	public var noteRGB:Bool = true;
+	public function set_override(name:String, value:Dynamic)
+	{
+		// Add overrideable properties here.
+		switch (name.toLowerCase())
+		{
+			case "noteSplashes":
+				if (Std.isOfType(value, Bool)) noteSplashes = value;
+			case "noteRBG":
+				if (Std.isOfType(value, Bool)) noteRGB = value;
+			case "ghostTapping":
+				if (Std.isOfType(value, Bool)) ghostTapping = value;
+		}
+	}
+
+	public function get_overrideList():Map<String, Dynamic>
+	{
+		var map:Map<String, Dynamic> = [
+			"noteSplashes" => noteSplashes,
+			"noteRGB" => noteRGB,
+			"ghostTapping" => ghostTapping
+		];
+
+		return map;
+	}
+
+	public function get_override(name:String):Dynamic
+	{
+		// Add overrideable properties here.
+		switch (name.toLowerCase())
+		{
+			case "noteSplashes": return noteSplashes;
+			case "noteRBG": return noteRGB;
+			case "ghostTapping": return ghostTapping;
+		}
+
+		trace("Invalid override!");
+		return null;
+	}
+
+	public function new()
+	{
+		for (field in Reflect.fields(ClientPrefs.data))
+		{
+			if (Reflect.hasField(this, field)) Reflect.setField(this, field, Reflect.field(ClientPrefs.data, field)); // keep this up to date with actual save variables.
+		}
+		noteRGB = true;
+		super();
+	}
 }
 
 class ClientPrefs
@@ -199,6 +260,8 @@ class ClientPrefs
 		{
 			if (Reflect.hasField(FlxG.save.data, funny)) Reflect.setField(data, funny, Reflect.field(FlxG.save.data, funny));
 		}
+
+		FlxG.drawFramerate = FlxG.updateFramerate = data.framerate;
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'universe');

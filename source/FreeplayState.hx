@@ -63,8 +63,6 @@ class FreeplayState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		ShortcutMenuSubState.inShortcutMenu = false;
-
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
@@ -310,7 +308,7 @@ class FreeplayState extends MusicBeatState
 			ratingSplit[1] += '0';
 		}
 
-		if (ClientPrefs.data.cm)
+		if (ClientPrefs.data.cuteMode)
 		{
 			bg.color = 0xFFfd719b;
 		}
@@ -337,7 +335,7 @@ class FreeplayState extends MusicBeatState
 			FlxTween.tween(cheatText, {alpha: 0}, 1);
 		}
 
-		if (songs.length > 1 && !ShortcutMenuSubState.inShortcutMenu)
+		if (songs.length > 1)
 		{
 			if (upP)
 			{
@@ -371,12 +369,6 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
-		if (FlxG.keys.justPressed.TAB)
-		{
-			openSubState(new ShortcutMenuSubState());
-			ShortcutMenuSubState.inShortcutMenu = true;
-		}
-
 		if (controls.UI_LEFT_P)
 			changeDiff(-1);
 		else if (controls.UI_RIGHT_P)
@@ -384,7 +376,7 @@ class FreeplayState extends MusicBeatState
 		else if (upP || downP)
 			changeDiff();
 
-		if (controls.BACK && !ShortcutMenuSubState.inShortcutMenu)
+		if (controls.BACK)
 		{
 			persistentUpdate = false;
 			if (colorTween != null)
@@ -402,7 +394,7 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
-		if (ctrl && !ShortcutMenuSubState.inShortcutMenu)
+		if (ctrl)
 		{
 			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
@@ -452,7 +444,7 @@ class FreeplayState extends MusicBeatState
 				#end
 			}
 		}
-		else if (accepted && !ShortcutMenuSubState.inShortcutMenu)
+		else if (accepted)
 		{
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);

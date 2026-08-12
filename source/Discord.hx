@@ -13,11 +13,12 @@ using StringTools;
 class DiscordClient
 {
 	public static var isInitialized:Bool = false;
+	public static var token:String = "1288919403362123827";
 	public function new()
 	{
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: "1288919403362123827",
+			clientID: token,
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -90,6 +91,13 @@ class DiscordClient
 		});
 
 		//trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp');
+	}
+
+	public static function changeToken(tokenStr:String)
+	{
+		token = tokenStr;
+		shutdown();
+		initialize();
 	}
 
 	#if LUA_ALLOWED

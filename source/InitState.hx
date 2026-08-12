@@ -64,14 +64,14 @@ class InitState extends FlxState
         if (ClientPrefs.data.moveCreditMods) ClientPrefs.data.moveCreditMods = false;
 
         #if !SILLY_OPTIONS
-        if (ClientPrefs.data.cm) ClientPrefs.data.cm = false;
+        if (ClientPrefs.data.cuteMode) ClientPrefs.data.cuteMode = false;
         if (ClientPrefs.data.ft) ClientPrefs.data.ft = false;
         if (ClientPrefs.data.fm) ClientPrefs.data.fm = false;
         if (ClientPrefs.data.sillyBob) ClientPrefs.data.sillyBob = false;
         if (ClientPrefs.data.ec) ClientPrefs.data.ec = false;
         if (ClientPrefs.data.snm) ClientPrefs.data.snm = false;
         if (ClientPrefs.data.tng) ClientPrefs.data.tng = false;
-        if (ClientPrefs.data.dcm) ClientPrefs.data.dcm = false;
+        if (ClientPrefs.data.darkenCamGame) ClientPrefs.data.darkenCamGame = false;
         if (ClientPrefs.data.dhb) ClientPrefs.data.dhb = false;
         if (ClientPrefs.data.cc) ClientPrefs.data.cc = false;
         if (ClientPrefs.data.hudZoomOut) ClientPrefs.data.hudZoomOut = false;

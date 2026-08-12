@@ -55,7 +55,6 @@ class StoryMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		ShortcutMenuSubState.inShortcutMenu = false;
 
 		PlayState.isStoryMode = true;
 		WeekData.reloadWeekFiles(true);
@@ -80,7 +79,7 @@ class StoryMenuState extends MusicBeatState
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
 		bgSprite = new FlxSprite(0, 56);
 		bgSprite.antialiasing = ClientPrefs.data.antialiasing;
-		if (ClientPrefs.data.cm)
+		if (ClientPrefs.data.cuteMode)
 		{
 			bgSprite.color = 0xFFfd719b;
 		}
@@ -179,7 +178,7 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.antialiasing = ClientPrefs.data.antialiasing;
 		difficultySelectors.add(rightArrow);
 
-		if (ClientPrefs.data.cm)
+		if (ClientPrefs.data.cuteMode)
 		{
 			add(bgCute);
 		}
@@ -227,7 +226,7 @@ class StoryMenuState extends MusicBeatState
 
 		// FlxG.watch.addQuick('font', scoreText.font);
 
-		if (!movedBack && !selectedWeek && !ShortcutMenuSubState.inShortcutMenu)
+		if (!movedBack && !selectedWeek)
 		{
 			var upP = controls.UI_UP_P;
 			var downP = controls.UI_DOWN_P;
@@ -284,7 +283,7 @@ class StoryMenuState extends MusicBeatState
 			}
 		}
 
-		if (controls.BACK && !movedBack && !selectedWeek && !ShortcutMenuSubState.inShortcutMenu)
+		if (controls.BACK && !movedBack && !selectedWeek)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
@@ -296,12 +295,6 @@ class StoryMenuState extends MusicBeatState
 			{
 				MusicBeatState.switchState(new MainMenuState());
 			}
-		}
-
-		if (FlxG.keys.justPressed.TAB)
-		{
-			openSubState(new ShortcutMenuSubState());
-			ShortcutMenuSubState.inShortcutMenu = true;
 		}
 
 		super.update(elapsed);

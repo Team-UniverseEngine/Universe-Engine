@@ -1,13 +1,15 @@
 package;
 
-import sys.TempStateData;
+import fps.FPSTicker;
+import fps.FancyFPS.FancyFPSDisplay as FancyFPS;
+import fps.FPSExtended;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
 import flixel.FlxState;
 import openfl.Assets;
 import openfl.Lib;
-import openfl.display.FPS;
+import fps.FPSExtended as FPS;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
@@ -36,6 +38,7 @@ class Main extends Sprite
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPS;
+	public static var fpsVar2:FancyFPS;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -84,16 +87,28 @@ class Main extends Sprite
 	
 		ClientPrefs.loadDefaultStuff();
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, framerate, framerate, skipSplash, startFullscreen));
-		new TempStateData();
 
 		#if !mobile
-		fpsVar = new FPS(10, 3, 0xFFFFFF);
+		FlxG.signals.postStateSwitch.add(()->{
+			FPSExtended.currentState = Type.getClassName(Type.getClass(FlxG.state));
+		});
+		FlxG.signals.preStateCreate.add((_)->{
+			fpsVar.defaultAddtlVars(); // Clear on every state refresh.
+		});
+		FlxG.signals.postUpdate.add(()->{
+			fpsVar.updateBox();
+		});
+		fpsVar = new FPS(10, 3);
+		fpsVar2 = new FancyFPS(10, 3);
 		addChild(fpsVar);
+		addChild(fpsVar2);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if(fpsVar != null) {
 			fpsVar.visible = ClientPrefs.data.showFPS;
+			fpsVar2.visible = ClientPrefs.data.fancyDisplay;
 		}
+		addChild(new FPSTicker());
 		#end
 
 		#if html5

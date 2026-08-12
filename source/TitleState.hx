@@ -39,6 +39,7 @@ import lime.app.Application;
 import openfl.Assets;
 import flixel.util.FlxAxes;
 import flixel.addons.display.FlxBackdrop;
+import haxe.Http;
 
 using StringTools;
 
@@ -93,11 +94,17 @@ class TitleState extends MusicBeatState
 	var creativity:FlxSprite;
 	var bg:FlxSprite;
 
+	var mustUpdate:Bool = false;
+	var newVer:Bool = false;
+
 	override public function create():Void
 	{
 		DiscordClient.changePresence("In the Intro", null);
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+
+		Main.fpsVar.addWatchVariable("Title To Play: ", ClientPrefs.data.mmm);
+		Main.fpsVar.addWatchVariable("Needs Update: ", false, () -> return (updateVersion != ""));
 
 		#if LUA_ALLOWED
 		Paths.pushGlobalMods();
@@ -191,7 +198,7 @@ class TitleState extends MusicBeatState
 			FlxTransitionableState.skipNextTransOut = true;
 			MusicBeatState.switchState(new FlashingState());
 		}
-		#if PROMPT_LAUNCHER // currently archived.
+		#if PROMPT_LAUNCHER
 		else if (FlxG.save.data.officialLauncher == null && !OfficialLauncherState.leftState) //Thing Remove popup officlal launcher
 		{
 			FlxTransitionableState.skipNextTransIn = true;
@@ -199,6 +206,39 @@ class TitleState extends MusicBeatState
 			MusicBeatState.switchState(new OfficialLauncherState()); // comment this line if you wanna remove the officiallauncherstate!
 		}
 		#end
+		if (ClientPrefs.data.checkForUpdates && !closedState)
+		{
+			var newRepo = new Http("https://raw.githubusercontent.com/Team-SolarEngine/Solar-Engine/refs/heads/main/gitVersion.txt");
+
+			newRepo.onData = function (data:String)
+			{
+				updateVersion = data.split('\n')[0].trim();
+				newVer = true;
+			}
+
+			newRepo.onError = function (error)
+			{
+				trace('checking for update');
+				var http = new Http("https://raw.githubusercontent.com/Team-SolarEngine/Solar-Engine-Archive/refs/heads/main/gitVersion.txt");
+
+				http.onData = function (data:String)
+				{
+					updateVersion = data.split('\n')[0].trim();
+					var curVersion:String = MainMenuState.psychEngineVersion.trim();
+					trace('version online: ' + updateVersion + ', your version: ' + curVersion);
+					if(updateVersion != curVersion) {
+						trace('versions arent matching!');
+						mustUpdate = true;
+					}
+				}
+
+				http.onError = function (error) {
+					trace('error: $error');
+				}
+				http.request();
+			}
+			newRepo.request();
+		}
 
 		#if desktop
 		if (!DiscordClient.isInitialized)
@@ -639,7 +679,15 @@ class TitleState extends MusicBeatState
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (ClientPrefs.data.fm)
+					if (newVer)
+					{
+						MusicBeatState.switchState(new RecodeAvailableState());
+					}
+					else if (mustUpdate)
+					{
+						MusicBeatState.switchState(new OutdatedState());
+					}
+					else if (ClientPrefs.data.fm)
 					{
 						MusicBeatState.switchState(new CoolMenuState());
 					}

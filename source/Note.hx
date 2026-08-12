@@ -90,7 +90,7 @@ class Note extends FlxSkewedSprite
 		texture: null,
 		antialiasing: !PlayState.isPixelStage,
 		useGlobalShader: false,
-		useRGBShader: (PlayState.SONG != null) ? !(PlayState.SONG.disableNoteRGB == true) : true,
+		useRGBShader: (PlayState.SONG != null) ? !(PlayState.SONG.disableNoteRGB == true || !PlayState.instance.overrides.noteRGB) : true,
 		r: -1,
 		g: -1,
 		b: -1,
@@ -394,7 +394,7 @@ class Note extends FlxSkewedSprite
 			earlyHitMult = 1;
 		}
 		x += offsetX;
-		if (PlayState.SONG != null && PlayState.SONG.disableNoteRGB)
+		if (PlayState.SONG != null && (PlayState.SONG.disableNoteRGB || !PlayState.instance.overrides.noteRGB))
 			rgbShader.enabled = useRGBShader = false;
 	}
 

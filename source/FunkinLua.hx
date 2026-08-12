@@ -242,8 +242,8 @@ class FunkinLua
 		set('UEiconBop', ClientPrefs.data.ib);
 		set('UEhidetimeBar', ClientPrefs.data.huet);
 		set('UE100comboSounds', ClientPrefs.data.css);
-		set('UEdarkenCamGame', ClientPrefs.data.dcm);
-		set('UEcute', ClientPrefs.data.cm);
+		set('UEdarkenCamGame', ClientPrefs.data.darkenCamGame);
+		set('UEcute', ClientPrefs.data.cuteMode);
 		set('UEmmm', ClientPrefs.data.mmm);
 		set('UEir', ir);
 		set('UEstrumsplash', ClientPrefs.data.uess);
@@ -285,6 +285,8 @@ class FunkinLua
 		#end
 
 		// ue
+		Lua_helper.add_callback(lua, "get_override", PlayState.instance.overrides.get_override);
+		Lua_helper.add_callback(lua, "set_override", PlayState.instance.overrides.set_override);
 		Lua_helper.add_callback(lua, "addGridBG", function(tag:String, cellWidth:Int, cellHeight:Int, width:Int, height:Int, xVel:Int, yVel:Int)
 		{
 			var backdrop = new FlxBackdrop(FlxGridOverlay.createGrid(cellWidth, cellHeight, width, height, true, 0x33FFFFFF, 0x0));
@@ -321,7 +323,7 @@ class FunkinLua
 			var screen = Lib.application.window;
 			FlxTween.tween(screen, {"height": sizeY}, duration, {ease: getFlxEaseByString(ease)});
 		});
-		Lua_helper.add_callback(lua, "windowPos", function(x:Float, y:Float, duration:Float, ease)
+		Lua_helper.add_callback(lua, "windowPos", function(x:Float, y:Float, duration:Float, ease:String)
 		{
 			var screen = Lib.application.window;
 			FlxTween.tween(screen, {"x": x}, duration, {ease: getFlxEaseByString(ease)});
